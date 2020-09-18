@@ -12,7 +12,7 @@
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
           transition="scale-transition"
-          width="40"
+          width="40" v-if="showNav"
         />
 
         <v-img
@@ -44,14 +44,31 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+//import HelloWorld from './components/HelloWorld'
+import { mapState } from 'vuex'
 
 export default {
   name: 'App',
-
-
+  watch: {
+    $route (to, from) {
+      if (typeof to.meta.title == "string")
+        document.title = to.meta.title
+      else if (typeof to.meta.title == "function")
+        document.title = to.meta.title(to)
+      else
+        document.title = "Riphah Web Resouces"
+    },
+    ...mapState(['userProfile']),
+  },
   data: () => ({
     //
-  })
+  }),
+  computed: {
+    ...mapState(['userProfile']),
+    showNav() {
+      console.log(Object.keys(this.userProfile))
+      return Object.keys(this.userProfile).length > 1
+    }
+  }
 }
 </script>

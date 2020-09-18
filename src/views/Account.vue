@@ -5,11 +5,10 @@
                 <p class="display-1 text--primary text-center">Login</p>
                 <div class="text--primary">
                     <v-form ref="form"  v-model="valid" lazy-validation>
-                        <v-text-field
-                            v-model="forms.login.sap"
-                            :counter="6"
-                            :rules="sapRules"
-                            label="SAP"
+                         <v-text-field
+                            v-model="forms.login.email"
+                            :rules="emailRules"
+                            label="E-mail"
                             required
                         ></v-text-field>
                         <v-text-field
@@ -19,12 +18,6 @@
                             required
                             type="password"
                         ></v-text-field>
-                        <v-checkbox
-                            v-model="checkbox"
-                            :rules="[v => !!v || 'You must agree to continue!']"
-                            label="Do you agree?"
-                            required
-                        ></v-checkbox>
                         <v-card-actions>
                             <v-btn
                                 color=""
@@ -35,7 +28,7 @@
                                 Signup
                             </v-btn>
                             <v-btn
-                                :disabled="!valid"
+                                :disabled="!valid || submit"
                                 color="success"
                                 class="mr-4"
                                 @click="doLogin"
@@ -81,12 +74,6 @@
                             required
                             type="password"
                         ></v-text-field>
-                        <v-checkbox
-                            v-model="checkbox"
-                            :rules="[v => !!v || 'You must agree to continue!']"
-                            label="Do you agree?"
-                            required
-                        ></v-checkbox>
                         <v-card-actions>
                             <v-btn
                                 class="mr-4"
@@ -96,10 +83,10 @@
                                 Back to login
                             </v-btn>
                             <v-btn
-                                :disabled="!valid"
+                                :disabled="!valid || submit"
                                 color="success"
                                 class="mr-4"
-                                @click="validate"
+                                @click="doSignup"
                                 style="float:right;"
                                 >
                                 Signup
@@ -109,45 +96,55 @@
                 </div>
             </v-card-text>
         </v-card>
+
+        <v-snackbar v-model="isMsg">{{ msg }} </v-snackbar>
+
     </div>
 
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      valid: true,
-      forms: {
-        login: {
-            sap: "",
-            password: "",
-        },
-        signup: {
-            name: "",
-            sap: "",
-            password: "",
-            email: '',
+import * as firebase from 'firebase/app'
+import router from '../router/index'
+
+export default {
+    data() {
+        return {
+            valid: true,
+            submit: false,
+            forms: {
+                login: {
+                    email: "",
+                    password: "",
+                },
+                signup: {
+                    name: "",
+                    sap: "",
+                    password: "",
+                    email: '',
+                }
+            },
+            nameRules: [
+                v => !!v || 'Name is required',
+                v => (v && v.length <= 100) || 'Name must be less than 100 characters',
+            ],
+            emailRules: [
+                v => !!v || 'E-mail is required',
+                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            ],
+            sapRules: [
+                v => !!v || 'Sap num is required',
+                v => /^[0-9]{4,6}$/.test(v) || 'SAP much be 4 to 6 digit long',
+            ],
+            passRules: [
+                v => !!v || 'Sap num is required',
+                v => /^[A-Za-z0-9]{6,}$/.test(v) || 'Password much be 6 digit or greater',
+            ],
+            showLoginForm: true,
+            isMsg: false,
+            msg: ""
         }
-      },
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 100) || 'Name must be less than 100 characters',
-      ],
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-      sapRules: [
-        v => !!v || 'Sap num is required',
-        v => /^[0-9]{4,6}$/.test(v) || 'SAP much be 4 to 6 digit long',
-      ],
-      passRules: [
-        v => !!v || 'Sap num is required',
-        v => /^[A-Za-z0-9]{6,}$/.test(v) || 'Password much be 6 digit or greater',
-      ],
-      checkbox: false,
-      showLoginForm: true,
-    }),
+    },
 
     methods: {
         toggleForm() {
@@ -164,19 +161,56 @@
         },
         doLogin() {
             this.validate();
-            console.log(this.valid)
+            this.isMsg = false
+            this.msg = ""
             if (this.valid) {
-                
-                // this.reset()
+                this.submit = true
+                firebase.auth().signInWithEmailAndPassword(this.forms.login.email, this.forms.login.password).then(
+                    (user) => {
+                        localStorage.setItem('auth', firebase.auth().currentUser.uid)
+                        this.isMsg = true
+                        this.msg = "Logged in successfully"
+                        this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
+                    },
+                    (err) => {
+                        this.isMsg = true
+                        this.msg = err.message
+                        this.submit = false
+                    }
+                );
             }
             this.resetValidation()
         },
         doSignup() {
             this.validate();
             if (this.valid) {
-                //code
+                this.submit = true
+                firebase.auth().createUserWithEmailAndPassword(this.forms.signup.email, this.forms.signup.password).then(
+                    (user) => {
+                        this.isMsg = true
+                        console.log(this.forms.signup)
+                        // create user profile object in userCollections
+                        this.$store.dispatch("completeProfile", {user: firebase.auth().currentUser, form: this.forms.signup})
+                        this.msg = "Account created successfully"
+                        this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
+                    },
+                    (err) => {
+                        this.isMsg = true
+                        this.msg = err.message
+                        this.submit = false
+                    }
+                );
             }
         },
+        checkLogin() {
+            if (localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined) {
+                router.push('/')
+            }
+        }
     },
-  }
+    mounted() {
+        // Do not open the login page if user already logged in.
+        this.checkLogin();
+    }
+}
 </script>
