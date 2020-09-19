@@ -13,13 +13,19 @@ export default new Vuex.Store({
       state.userProfile = val
     }
   },
+  getters: {
+    getCurrentUser : (state) => {
+      return state.userProfile
+    }
+  },
   actions: {
     async completeProfile({dispatch}, data) {
       console.log(data)
       // create user profile object in userCollections
       await fb.usersCollection.doc(data.user.uid).set({
         name: data.form.name,
-        sap: data.form.sap
+        sap: data.form.sap,
+        role: "student"
       });
         // fetch user profile and set in state
       dispatch('fetchUserProfile', data.user)
@@ -33,7 +39,7 @@ export default new Vuex.Store({
       commit('setUserProfile', userProfile.data())
       
       // change route to dashboard
-      router.push('/')
+      //router.push('/')
     },
     async logout({ commit }) {
       await fb.auth.signOut()

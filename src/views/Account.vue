@@ -188,7 +188,6 @@ export default {
                 firebase.auth().createUserWithEmailAndPassword(this.forms.signup.email, this.forms.signup.password).then(
                     (user) => {
                         this.isMsg = true
-                        console.log(this.forms.signup)
                         // create user profile object in userCollections
                         this.$store.dispatch("completeProfile", {user: firebase.auth().currentUser, form: this.forms.signup})
                         this.msg = "Account created successfully"
@@ -202,7 +201,7 @@ export default {
                 );
             }
         },
-        checkLogin() {
+        isLogin() {
             if (localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined) {
                 router.push('/')
             }
@@ -210,7 +209,7 @@ export default {
     },
     mounted() {
         // Do not open the login page if user already logged in.
-        this.checkLogin();
+        this.isLogin();
     }
 }
 </script>

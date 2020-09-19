@@ -57,16 +57,28 @@ export default {
         document.title = to.meta.title(to)
       else
         document.title = "Riphah Web Resouces"
+
     },
     ...mapState(['userProfile']),
   },
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    userData() {
+      if (localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined) {
+        this.$store.dispatch("fetchUserProfile", {uid: localStorage.getItem("auth")})
+      }
+    }
+  },
+  mounted() {
+    this.userData()
+  },
   computed: {
     ...mapState(['userProfile']),
     showNav() {
-      console.log(Object.keys(this.userProfile))
       return Object.keys(this.userProfile).length > 1
     }
   }
