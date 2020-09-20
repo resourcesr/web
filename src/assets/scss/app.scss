@@ -13,6 +13,22 @@
      padding: 16px;
  }
  
+  a {
+    color: #000!important;
+    text-decoration: none!important;
+ }
+  a:hover {
+    text-decoration: none!important;
+ }
+
+ select, option {
+   width: 100%;
+   padding: 12px;
+   border: 1px solid black;
+ }
+ .label-custom {
+   padding: 12px;
+ }
  @media only screen and (max-width: 1380px) {
 
  }

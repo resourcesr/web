@@ -11,9 +11,11 @@ const auth = firebase.auth()
 
 // collection references
 const usersCollection = db.collection('users')
-const classesCollection = db.collection('classes')
-const semestorsCollection = db.collection('semestors')
-const resourcesCollection = db.collection('resources')
+const subjectsCollection = db.collection('subjects')
+const classesCollection = db.collection('subjects/classes/main')
+const coursesCollection = db.collection('subjects/classes/courses')
+const resourcesCollection = db.collection('subjects/courses/resources')
+const tasksCollection = db.collection('subjects/classes/tasks')
 const postsCollection = db.collection('posts')
 
 // export utils/refs
@@ -22,7 +24,9 @@ export {
   auth,
   usersCollection,
   postsCollection,
-  semestorsCollection,
+  subjectsCollection,
   resourcesCollection,
-  classesCollection
+  classesCollection,
+  tasksCollection,
+  coursesCollection
 }

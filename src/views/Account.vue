@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-card class="mx-auto" max-width="800" v-if="showLoginForm">
+        <v-card class="mx-auto" max-width="800" v-if="showLoginForm" tile>
             <v-card-text>
                 <p class="display-1 text--primary text-center">Login</p>
                 <div class="text--primary">
