@@ -12,6 +12,30 @@ const routes = [
     component: Home
   },
   {
+    path: '/classes/:department/:name',
+    name: 'classes:index',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Classes.vue'),
+    meta: {
+      title: (route) => route.params.name,
+    },
+  },
+  {
+    path: '/classes/courses/:course/:name',
+    name: 'courses:index',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Courses.vue'),
+    meta: {
+      title: (route) => route.params.name,
+    },
+  },
+  {
+    path: '/courses/:course/:name',
+    name: 'courses:resources',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Resource.vue'),
+    meta: {
+      title: (route) => route.params.name,
+    },
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')

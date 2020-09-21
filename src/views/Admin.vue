@@ -3,9 +3,6 @@
         <div v-if="user.role == 'admin'">
             <v-card>
                 <v-tabs v-model="tab">
-                    <v-tab tab='subjects'>
-                        Subjects
-                    </v-tab>
                     <v-tab tab='classes'>
                         Classes
                     </v-tab>
@@ -25,52 +22,6 @@
                 <v-divider />
 
                 <v-tabs-items v-model="tab">
-                    <v-tab-item tab='subjects'>
-                        <v-card flat>
-                            <v-card-title>Subjects</v-card-title>
-                            <v-card-subtitle>Lists</v-card-subtitle>
-                            <v-card-text>
-                                <v-list v-if="subject.length">
-                                    <v-list-item v-for="sub in subject" :key="sub.id">
-                                    {{sub.name}} - {{sub.code}}
-                                    </v-list-item>
-                                </v-list>
-                            </v-card-text>
-                            <v-card-subtitle>Add new</v-card-subtitle>
-                            <v-card class="mx-auto" tile>
-                                <v-card-text>
-                                    <div class="text--primary">
-                                        <v-form ref="form"  v-model="valid" lazy-validation>
-                                            <v-text-field
-                                                v-model="subjects.forms.name"
-                                                :rules="nameRules"
-                                                label="Name"
-                                                required
-                                            ></v-text-field>
-                                            <v-text-field
-                                                v-model="subjects.forms.code"
-                                                :rules="nameRules"
-                                                label="Code"
-                                                required
-                                                type="Code"
-                                            ></v-text-field>
-                                            <v-card-actions>
-                                                <v-btn
-                                                    :disabled="!valid || submit"
-                                                    color="success"
-                                                    class="mr-4"
-                                                    @click="addSubject"
-                                                    style="float:right;"
-                                                    >
-                                                    Add
-                                                </v-btn>
-                                            </v-card-actions>
-                                        </v-form>
-                                    </div>
-                                </v-card-text>
-                            </v-card>
-                        </v-card>
-                    </v-tab-item>
                     <v-tab-item tab='classes'>
                         <v-card flat>
                             <v-card-title>Classes</v-card-title>
@@ -125,7 +76,7 @@
                     </v-tab-item>
                     <v-tab-item tab='courses'>
                         <v-card flat>
-                            <v-card-title>COurses</v-card-title>
+                            <v-card-title>Courses</v-card-title>
                             <v-card-subtitle>Lists</v-card-subtitle>
                             <v-card-text>
                                 <v-list>
@@ -142,18 +93,39 @@
                                                 :rules="nameRules"
                                                 label="title"
                                                 required
-                                            ></v-text-field>
-                                            <label class="label-custom">Select Subject</label>
-                                            <select class="v-select__selections" v-model="courses.forms.subject_id">
-                                                <option v-for="item in subject" :key="item.id" :value="item.id">{{item.name}}</option>
-                                            </select>
-                                            <label class="label-custom">Select Course</label>
+                                            >
+                                            </v-text-field>
+                                            <v-text-field
+                                                v-model="courses.forms.teacher"
+                                                :rules="nameRules"
+                                                label="Teacher"
+                                                required
+                                            >
+                                            </v-text-field>
+                                            <v-text-field
+                                                v-model="courses.forms.code"
+                                                :rules="nameRules"
+                                                label="Code"
+                                                required
+                                            >
+                                            </v-text-field>
+                                    
+                                            <label class="label-custom">Select Class</label>
                                             <select class="v-select__selections" v-model="courses.forms.class_id">
                                                 <option v-for="item in pClasses" :key="item.id" :value="item.id">{{item.name}}</option>
                                             </select>
                                             <label class="label-custom">Select semstor</label>
                                             <select class="v-select__selections" v-model="courses.forms.semstor">
                                                 <option v-for="item in semstors" :key="item" :value="item">{{item}}</option>
+                                            </select>
+                                            <label class="label-custom">Select Credit Hrs</label>
+                                            <select class="v-select__selections" v-model="courses.forms.credit">
+                                                <option v-for="item in [1, 2, 3, 4, 5]" :key="item.id" :value="item">{{item}}</option>
+                                            </select>
+                                            <label class="label-custom">Has lab</label>
+                                            <select class="v-select__selections" v-model="courses.forms.lab">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
                                             </select>
                                             <v-card-actions>
                                                 <v-btn
@@ -193,12 +165,6 @@
                                                 required
                                             ></v-text-field>
                                             <v-text-field
-                                                v-model="resources.forms.icon"
-                                                :rules="nameRules"
-                                                label="Icon"
-                                                required
-                                            ></v-text-field>
-                                            <v-text-field
                                                 v-model="resources.forms.openUrl"
                                                 :rules="nameRules"
                                                 label="Open URL"
@@ -211,8 +177,16 @@
                                                 required
                                             ></v-text-field>
                                             <label class="label-custom">Select Course</label>
-                                            <select class="v-select__selections" v-model="courses.forms.subject_id">
+                                            <select class="v-select__selections" v-model="resources.forms.course_id">
                                                 <option v-for="item in _courses" :key="item.id" :value="item.id">{{item.title}}</option>
+                                            </select>
+                                            <label class="label-custom">Select Icon</label>
+                                            <select class="v-select__selections" v-model="resources.forms.icon">
+                                                <option v-for="(item, index) in icons" :key="index" :value="item">{{item}}</option>
+                                            </select>
+                                            <label class="label-custom">Select Type</label>
+                                            <select class="v-select__selections" v-model="resources.forms.type">
+                                                <option v-for="(item, index) in types" :key="index" :value="item">{{item}}</option>
                                             </select>
                                             <v-card-actions>
                                                 <v-btn
@@ -254,6 +228,16 @@ export default {
         isMsg: false,
         msg: "",
         subs: [],
+        icons: {
+            word: "word",
+            powerpoint: "powerpoint",
+            zip: "zip",
+            pdf: "pdf",
+            file: "file",
+        },
+        types: [
+            'slides', 'books'
+        ],
         semstors: [
             1, 2, 3, 4, 5, 6, 7, 8
         ],
@@ -261,12 +245,6 @@ export default {
             v => !!v || 'Name is required',
             v => (v && v.length <= 100) || 'Name must be less than 100 characters',
         ],
-        subjects: {
-            forms: {
-                name: "", // Programming fundenmntals
-                code: "", // cs150
-            },
-        },
         classes: {
             forms: {
                 program: "", // BSSE
@@ -276,10 +254,13 @@ export default {
         },
         courses: {
             forms: {
-                subject_id: "", // BSSE
                 class_id: "", // Programming fundenmntals
                 title: "", //title
                 semstor: "",
+                teacher: "",
+                code: "",
+                credit: "",
+                lab: "",
             },
         },
         resources: {
@@ -289,6 +270,7 @@ export default {
                 icon: "",
                 openUrl: "",
                 downloadUrl: "",
+                type: "",
             },
         },
         tasks: {
@@ -315,16 +297,6 @@ export default {
       }
     },
     methods: {
-        addSubject() {
-            this.submit = true
-            if (this.valid) {
-                console.log(this.subjects.forms)
-                this.$store.dispatch("addSubject", this.subjects.forms)
-            }
-            this.isMsg = true
-            this.msg = "Added successfully"
-            this.submit = false
-        },
         addClasses() {
             this.submit = true
             if (this.valid) {
@@ -354,16 +326,12 @@ export default {
         },
     },
     mounted() {
-        this.$store.dispatch("getSubjects")
         this.$store.dispatch("getClasses")
         this.$store.dispatch("getAllCourses")
     },
     computed: {
         user() {
             return this.$store.getters.getCurrentUser
-        },
-        subject() {
-            return this.$store.getters.subjects
         },
         _class() {
             return this.$store.getters.pClasses
@@ -372,7 +340,7 @@ export default {
             return this.$store.getters.pClasses
         },
         _courses() {
-            return this.$store.getters._courses
+            return this.$store.getters.courses
         }
     }
 }
