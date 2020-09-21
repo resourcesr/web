@@ -8,7 +8,7 @@
             <v-tab tab='Tasks'>
                 Tasks
             </v-tab>
-            <v-tab tab='labs' v-if="course.data.lab == '1'">
+            <!-- <v-tab tab='labs' v-if="course.data.lab == '1'">
                 Labs
             </v-tab>
             <v-tab tab='assignments'>
@@ -19,7 +19,7 @@
             </v-tab>
             <v-tab tab='about' >
                 About
-            </v-tab>
+            </v-tab> -->
         </v-tabs>
         <v-divider />
         <br /><br />
@@ -35,19 +35,19 @@
                                     <div>
                                         <v-container class="">
                                             <v-row no-gutters class="padding: 25px">
-                                                <v-col key="1">
-                                                 <div class="resource">
-                                            <p class="left">
-                                                 <img :src="`/img/files/${icons[resource.icon] || 'file'}.svg`" class="mr-4 w-8" >
-                                            </p>
-                                            <div class="center">
-                                                <p class="name">{{resource.name}}</p>
-                                                <p class="cr">Uploaded <strong>{{timeSince(resource.created.seconds) }}  </strong> by
-                                                
-                                               <strong> {{resource.userName}} </strong></p>
-                                            </div></div>
+                                                <v-col key="1" sm="10" xs="10" md="10" xl="10" lg="10">
+                                                    <div class="resource">
+                                                        <p class="left">
+                                                            <img :src="`/img/files/${icons[resource.icon] || 'file'}.svg`" class="mr-4 w-8" >
+                                                        </p>
+                                                        <div class="center">
+                                                            <p class="name">{{resource.name}}</p>
+                                                            <p class="cr">Uploaded <strong>{{timeSince(resource.created.seconds) }}  </strong> by
+                                                            <strong> {{resource.userName}} </strong></p>
+                                                        </div>
+                                                    </div>
                                                 </v-col>
-                                                <v-col key="3">
+                                                <v-col key="2" sm="2" xs="2" md="2" lg="2" xl="2">
                                                     <p class="res_right">
                                                         <a :href="resource.downloadUrl" target="_blank" ><v-icon>mdi-link-variant</v-icon></a>
                                                         <a :href="resource.downloadUrl" target="_blank" ><v-icon>mdi-file-download</v-icon></a>
@@ -56,7 +56,6 @@
                                                 <v-responsive  width="100%" ></v-responsive>
                                             </v-row>
                                         </v-container>
-                                      
                                     </div>
                                 </v-card >
                             </div>
