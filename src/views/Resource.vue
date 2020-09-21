@@ -33,7 +33,10 @@
                             <div v-for="resource in resources.data" :key="resource.id">
                                 <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-if="type == resource.type">
                                     <div>
-                                        <div class="resource">
+                                        <v-container class="">
+                                            <v-row no-gutters class="padding: 25px">
+                                                <v-col key="1">
+                                                 <div class="resource">
                                             <p class="left">
                                                  <img :src="`/img/files/${icons[resource.icon] || 'file'}.svg`" class="mr-4 w-8" >
                                             </p>
@@ -42,12 +45,18 @@
                                                 <p class="cr">Uploaded <strong>{{timeSince(resource.created.seconds) }}  </strong> by
                                                 
                                                <strong> {{resource.userName}} </strong></p>
-                                            </div>
-                                            <p class="right">
-                                                <a :href="resource.downloadUrl" target="_blank" ><v-icon>mdi-link-variant</v-icon></a>
-                                                <a :href="resource.downloadUrl" target="_blank" ><v-icon>mdi-file-download</v-icon></a>
-                                            </p>
-                                        </div>
+                                            </div></div>
+                                                </v-col>
+                                                <v-col key="3">
+                                                    <p class="res_right">
+                                                        <a :href="resource.downloadUrl" target="_blank" ><v-icon>mdi-link-variant</v-icon></a>
+                                                        <a :href="resource.downloadUrl" target="_blank" ><v-icon>mdi-file-download</v-icon></a>
+                                                    </p>
+                                                </v-col>
+                                                <v-responsive  width="100%" ></v-responsive>
+                                            </v-row>
+                                        </v-container>
+                                      
                                     </div>
                                 </v-card >
                             </div>

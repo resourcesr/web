@@ -86,15 +86,14 @@
   width: 30px;
   margin-top: 26px;
 }
-.resource .right {
+.res_right {
   float: right !important;
-  margin-left: 450px;
   margin-top: 25px;
 }
-.resource .right a:first-child{
+.res_right a:first-child{
   margin-left: -16px;
  }
- .resource .right .v-icon.v-icon {
+.res_right .v-icon.v-icon {
   font-size: 30px;
   padding: 6px;
  }
@@ -122,7 +121,5 @@
 .v-sheet.v-card:not(.v-sheet--outlined) {
   box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.12);
 }
- @media only screen and (max-width: 1380px) {
-
- }
- 
+@media only screen and (max-width: 1380px) {
+}

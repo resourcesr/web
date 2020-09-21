@@ -45,6 +45,7 @@ export default {
 
     },
     mounted() {
+        this.$store.dispatch("getCourseById", this.course)
         this.$store.dispatch("getCourseByProgram", this.course)
     },
     computed: {
