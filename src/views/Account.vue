@@ -1,8 +1,12 @@
 <template>
     <div>
-        <v-card class="mx-auto" max-width="800" v-if="showLoginForm" tile>
+        <v-card class="mx-auto" max-width="600" v-if="showLoginForm" tile>
             <v-card-text>
-                <p class="display-1 text--primary text-center">Login</p>
+                <div>
+                    <h3 class="title text--primary text-center">Get Started</h3>
+                    <p class="text-center">Please enter the following detail to get started</p>
+                    <v-divider />
+                </div>
                 <div class="text--primary">
                     <v-form ref="form"  v-model="valid" lazy-validation>
                          <v-text-field
@@ -18,33 +22,36 @@
                             required
                             type="password"
                         ></v-text-field>
-                        <v-card-actions>
-                            <v-btn
-                                color=""
-                                class="mr-4"
-                                @click="toggleForm"
-                                style="float:left;"
-                                >
-                                Signup
-                            </v-btn>
-                            <v-btn
-                                :disabled="!valid || submit"
-                                color="success"
-                                class="mr-4"
-                                @click="doLogin"
-                                style="float:right;"
-                                >
-                                Login
-                            </v-btn>
+                        <v-card-actions style="display: block" class="pt-2">
+                            <div class="">
+                                <a href="#!" @click="toggleForm" style="float:left">Don't have account?</a>
+                                <a href="#!" style="float:right">Forget Password?</a>
+                            </div>
+                            <div class="pt-10">
+                                <v-btn
+                                    :disabled="!valid || submit"
+                                    color="success"
+                                    class=""
+                                    @click="doLogin"
+                                    style="width:100%"
+
+                                    >
+                                    Login
+                                </v-btn>
+                            </div>
                         </v-card-actions>
                     </v-form>
                 </div>
             </v-card-text>
 
         </v-card>
-        <v-card class="mx-auto" max-width="800" v-if="!showLoginForm">
+        <v-card class="mx-auto" max-width="600" v-if="!showLoginForm">
             <v-card-text>
-                <p class="display-1 text--primary text-center">Register</p>
+                <div>
+                    <h3 class="title text--primary text-center">Get Started</h3>
+                    <p class="text-center">Please enter the following detail to get started</p>
+                    <v-divider />
+                </div>
                 <div class="text--primary">
                     <v-form ref="form"  v-model="valid" lazy-validation>
                         <v-text-field
@@ -74,23 +81,22 @@
                             required
                             type="password"
                         ></v-text-field>
-                        <v-card-actions>
-                            <v-btn
-                                class="mr-4"
-                                @click="toggleForm"
-                                style="float:left;"
-                                >
-                                Back to login
-                            </v-btn>
-                            <v-btn
-                                :disabled="!valid || submit"
-                                color="success"
-                                class="mr-4"
-                                @click="doSignup"
-                                style="float:right;"
-                                >
-                                Signup
-                            </v-btn>
+                        <v-card-actions style="display: block" class="pt-2">
+                            <div class="">
+                                <a href="#!" @click="toggleForm" style="float:left">Back to login?</a>
+                            </div>
+                            <div class="pt-10">
+                                <v-btn
+                                    :disabled="!valid || submit"
+                                    color="success"
+                                    class=""
+                                    @click="doSignup"
+                                    style="width:100%"
+
+                                    >
+                                    Signup
+                                </v-btn>
+                            </div>
                         </v-card-actions>
                     </v-form>
                 </div>
