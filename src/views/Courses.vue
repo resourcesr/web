@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import _colorFromStr from "../utils"
+import _colorFromStr from "../utils/"
 export default {
     name: 'courses',
     data() {
