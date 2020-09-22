@@ -8,7 +8,7 @@
             <v-tab tab='Tasks'>
                 Tasks
             </v-tab>
-            <!-- <v-tab tab='labs' v-if="course.data.lab == '1'">
+            <v-tab tab='labs' v-if="course.data.lab == '1'">
                 Labs
             </v-tab>
             <v-tab tab='assignments'>
@@ -19,7 +19,7 @@
             </v-tab>
             <v-tab tab='about' >
                 About
-            </v-tab> -->
+            </v-tab>
         </v-tabs>
         <v-divider />
         <br /><br />
@@ -41,7 +41,7 @@
                                                             <img :src="`/img/files/${icons[resource.icon] || 'file'}.svg`" class="mr-4 w-8" >
                                                         </p>
                                                         <div class="center">
-                                                            <p class="name">{{resource.name}}</p>
+                                                            <p class="name text-wrap">{{resource.name}}</p>
                                                             <p class="cr">Uploaded <strong>{{timeSince(resource.created.seconds) }}  </strong> by
                                                             <strong> {{resource.userName}} </strong></p>
                                                         </div>
@@ -91,35 +91,35 @@
                     </v-card-text>
                 </v-card>
             </v-tab-item>
-            <v-tab-item tab='about' max-width="600">
+            <v-tab-item tab='about' max-width="1000">
                 <v-card class="mx-auto" max-width="1000">
                     <v-card-text>
-                      <v-container class="grey lighten-5">
+                      <v-container>
                         <v-row no-gutters class="padding: 25px">
                             <v-col key="1">
-                                <v-card class="pa-3" tile >
+                                <div class="pa-3">
                                     <h3>Course Title:</h3>
                                     {{course.data.title}}
-                                </v-card>
+                                </div>
                             </v-col>
                             <v-col key="2" >
-                                <v-card class="pa-3"  tile >
-                                    <h3>Course Teacher:</h3>
+                                <div class="pa-3">
+                                    <h3>Teacher:</h3>
                                     {{course.data.teacher}}
-                                </v-card>
+                                </div>
                             </v-col>
                             <v-responsive  width="100%" ></v-responsive>
                             <v-col key="3">
-                                <v-card class="pa-3"  tile >
+                                <div class="pa-3">
                                     <h3>Credit Code: </h3>
                                     {{course.data.code}} 
-                                </v-card>
+                                </div>
                             </v-col>
                             <v-col key="4">
-                                <v-card class="pa-3" tile >
+                                <div class="pa-3">
                                     <h3>Credit Hrs: </h3>
                                     {{course.data.credit}} 
-                                </v-card>
+                                </div>
                             </v-col>
                         </v-row>
                     </v-container>
