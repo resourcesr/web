@@ -65,12 +65,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .res:hover {
-    background-color: #e7e8e8;
-  }
-  .res_right {
-    padding: 25px;
-  }
-</style>

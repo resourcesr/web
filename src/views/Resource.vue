@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h3 class="title text-center">{{course.name}}</h3>
+        <div>
+            <h3 class="title text-center">{{courseName}}</h3>
+        </div>
         <v-tabs v-model="tab">
             <v-tab tab='resources'>
                 Resources
@@ -132,7 +134,7 @@
 
 <script>
 export default {
-    name: 'Home',
+    name: 'resource',
     data() {
         const {course: cId, name: courseName} = this.$route.params;
         return {
