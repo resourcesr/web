@@ -42,11 +42,7 @@ export default {
             departments: [
                 {
                     key: "fc",
-                    name: "faculty of computing",
-                },
-                {
-                    key: "phy",
-                    name: "faculty of physics",
+                    name: "Department Of Computing",
                 }
             ]
         }
