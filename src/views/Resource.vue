@@ -31,6 +31,7 @@
                 <div>
                     <div v-for="(type, index) in resources.types" :key="index">
                         <h3 v-if="type=='slides'"  class="title text-center">Slides / Notes</h3>
+                        <h3 v-else-if="type=='projects'"  class="title text-center">Projects</h3>
                         <h3 v-else class="title text-center">Books</h3>
                         <div style="" v-if="resources.data.length">
                             <div v-for="resource in resources.data" :key="resource.id">

@@ -28,7 +28,7 @@
                         <v-card-actions style="display: block" class="pt-2">
                             <div class="">
                                 <a href="#!" @click="toggleForm" style="float:left">Don't have account?</a>
-                                <a href="#!" style="float:right">Forget Password?</a>
+                                <a href="#!" style="float:right"><router-link :to="{ name: 'reset' }">Forget Password?</router-link></a>
                             </div>
                             <div class="pt-10">
                                 <v-btn
@@ -202,10 +202,10 @@ export default {
         resetValidation () {
             this.$refs.form.resetValidation()
         },
-        loginWithGoogle() {
+        async loginWithGoogle() {
             this.submit = true
             const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider).then(resp => {
+            await firebase.auth().signInWithPopup(provider).then(resp => {
                 this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
                 this.$router.push({name: "fill"})
             }).catch(err => {

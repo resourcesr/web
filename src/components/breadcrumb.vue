@@ -1,5 +1,6 @@
 <template>
     <div>
+        <v-divider />
         <v-card tile>
             <v-card-text>
                 <ul class="breadcrumb">

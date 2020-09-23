@@ -1,0 +1,40 @@
+.v-application--wrap {
+  background-color: #1e1e1e!important;
+}
+.v-window-item--active {
+background-color: #1e1e1e!important;
+}
+a {
+    color: #fff!important;
+ }
+
+.resource .center .name, .resource .center .cr {
+    color: #fff!important;
+}
+ select, option {
+   width: 100%;
+   padding: 18px;
+   border: 1px solid black;
+ }
+.department-select .cr {
+  color: #fff!important;
+}
+.department-select:hover {
+  background-color: rgb(34, 24, 24)!important;
+}
+.res:hover {
+  background-color: rgb(34, 24, 24)!important;
+}
+.resource .cr {
+  color: #fff!important;
+}
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.12);
+}
+.breadcrumb li {
+  color: #fff!important;
+}
+.breadcrumb > li {
+  color: #fff!important;
+}
+

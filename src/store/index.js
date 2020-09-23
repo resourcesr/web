@@ -71,6 +71,7 @@ export default new Vuex.Store({
         program: form.program,
         name: form.name,
         code: form.code,
+        cr: form.cr,
       })
     },
     async getClasses({commit}) {
@@ -159,7 +160,7 @@ export default new Vuex.Store({
       })
     },
     async addResources({commit}, form) {
-      const userProfile = await fb.usersCollection.orderBy('created', 'asc').doc(fb.auth.currentUser.uid).get()
+      const userProfile = await fb.usersCollection.doc(fb.auth.currentUser.uid).get()
       await fb.resourcesCollection.add({
         created: new Date(),
         userId: fb.auth.currentUser.uid,
@@ -173,7 +174,7 @@ export default new Vuex.Store({
       })
     },
     async getResourcesByCourse({commit}, course) {
-      const subjects = await fb.resourcesCollection.where("course_id", "==", course).onSnapshot(snapshot => {
+      const subjects = await fb.resourcesCollection.orderBy('created', 'desc').where("course_id", "==", course).onSnapshot(snapshot => {
         let resArray = []
         let types = []
         snapshot.forEach(doc => {
@@ -194,7 +195,8 @@ export default new Vuex.Store({
       // clear userProfile and redirect to /login
       commit('setUserProfile', {})
       localStorage.removeItem("auth")
-      router.push({name: "account"})
+      window.location.href = "/"
+      //router.push({name: "account"})
     },
   },
   modules: {

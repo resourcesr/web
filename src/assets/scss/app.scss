@@ -1,5 +1,5 @@
 /**
- *  Name: lablnet
+ *  Name: ResourceR
  *  Version: 1.0
  *  Designed By: Muhammad Umer Farooq
  */
@@ -7,142 +7,129 @@
  @import url('https://fonts.googleapis.com/css?family=Nunito:400,800&display=swap');
  @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons');
  
- .v-application--wrap {
-     font-family: Georgia, 'Times New Roman', Times, serif;
-     background-color: #e7e8e8!important;
-     padding: 16px;
- }
- .v-window-item--active {
-  background-color: #e7e8e8!important;
- }
-  a {
+.v-application--wrap {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #e7e8e8!important;
+    padding: 16px;
+}
+.v-application--wrap {
+    padding: 0px;
+    margin: 0px;
+}
+.v-window-item--active {
+    background-color: #e7e8e8;
+}
+a {
     color: #000!important;
     text-decoration: none!important;
- }
-  a:hover {
+}
+a:hover {
     text-decoration: none!important;
- }
+}
 
- select, option {
-   width: 100%;
-   padding: 18px;
-   border: 1px solid black;
- }
- .label-custom {
-   padding: 12px;
- }
- .title {
-  font-weight: 100;
-  font-size: 22px;
-  text-transform: uppercase;
+select, option {
+    width: 100%;
+    padding: 18px;
+    border: 1px solid black;
+}
+.label-custom {
+    padding: 12px;
+}
+.title {
+    font-weight: 100;
+    font-size: 22px;
+    text-transform: uppercase;
 }
 .department-select {
-  display:flex!important;
-  padding-top: 18px;
-  padding: 6px;
+    display:flex!important;
+    padding-top: 18px;
+    padding: 6px;
 }
 .department-select .left {
-  width: 35px;
+    width: 35px;
 }
 .department-select .right {
-  float: right!important;
-  margin-left: 90px;
-  margin-top: 20px;
+    float: right!important;
+    margin-left: 90px;
+    margin-top: 20px;
 }
 .department-select .center {
-  margin-top: 3px;
+    margin-top: 3px;
 }
 .department-select .name {
-  width: 400px;
+    width: 400px;
 }
 .department-select .cr {
-  margin-top: -12px;
-  font-size: 12px;
-  font-weight: 100;
-  color: #000;
-  opacity: 0.6;
+    margin-top: -12px;
+    font-size: 12px;
+    font-weight: 100;
+    color: #000;
+    opacity: 0.6;
 }
 .department-select:hover {
-  background-color: #e7e8e8;
+    background-color: #e7e8e8;
 }
 .res:hover {
-  background-color: #e7e8e8;
+    background-color: #e7e8e8;
 }
 .res_right {
-  padding: 25px;
+    padding: 25px;
 }
 .resource {
-  display: flex;
-  padding-top: 18px;
-  padding: 6px;
+    display: flex;
+    padding-top: 18px;
+    padding: 6px;
 }
 .resource .center .name, .resource .center .cr {
-  font-family: monospace;
-  word-break: break-all;
-  width: auto;
+    font-family: monospace;
+    word-break: break-all;
+    width: auto;
 }
 .resource .center strong {
-  font-weight: 600;
+    font-weight: 600;
 }
 .resource .left img, .resource .left svg {
-  width: 30px;
-  margin-top: 26px;
+    width: 30px;
+    margin-top: 26px;
 }
 .res_right {
-  float: right !important;
-  margin-top: 25px;
+    float: right !important;
+    margin-top: 25px;
 }
 .res_right a:first-child{
-  margin-left: -16px;
- }
+    margin-left: -16px;
+}
 .res_right .v-icon.v-icon {
-  font-size: 30px;
-  padding: 6px;
- }
+    font-size: 30px;
+    padding: 6px;
+}
 .resource .center {
-  margin-top: 19px;
-  margin-left: 5px;
+    margin-top: 19px;
+    margin-left: 5px;
 }
 .resource .name {
-  width: 400px;
+    width: 400px;
 }
 .resource .cr {
-  margin-top: -12px;
-  font-size: 12px;
-  font-weight: 100;
-  color: #000;
-  opacity: 0.6;
-}
-.icon_class {
-  /*width: 24px; */
-  /* font-size: 40px; */
-  background: rebeccapurple;
-  margin-top: 10px;
-  /* margin: 32px;*/
+    margin-top: -12px;
+    font-size: 12px;
+    font-weight: 100;
+    color: #000;
+    opacity: 0.6;
 }
 .v-sheet.v-card:not(.v-sheet--outlined) {
-  box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.12);
 }
 .breadcrumb { 
-  list-style: none; 
-  overflow: hidden; 
+    list-style: none; 
+    overflow: hidden; 
 }
 .breadcrumb li {
-  color: 000;
-  position: relative; 
-  display: block;
-  float: left;
-}
-.breadcrumb > li {
-  display: flex;
-  float: left;
-  height: 10px;
-  width: auto;
-  color: #000;
-  font-weight: bold;
-  font-size: .8em;
-  cursor: default;
-  align-items: center;
+    color: 000;
+    position: relative; 
+    display: block;
+    float: left;
+    padding: 10px;
 }
 .breadcrumb > li {
     display: flex;
@@ -152,13 +139,13 @@
     color: #000;
     font-weight: bold;
     font-size: .8em;
-    cursor: pointer;
+    cursor: default;
     align-items: center;
-  }
+}
 .linked {
-  cursor: pointer;
-  font-size: 1em;
-  font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
 }
 @media only screen and (max-width: 1380px) {
 }

@@ -58,6 +58,12 @@
                                                 required
                                                 type="Code"
                                             ></v-text-field>
+                                            <v-text-field
+                                                v-model="classes.forms.cr"
+                                                :rules="nameRules"
+                                                label="CR"
+                                                required
+                                            ></v-text-field>
                                             <v-card-actions>
                                                 <v-btn
                                                     :disabled="!valid || submit"
@@ -81,7 +87,9 @@
                             <v-card-subtitle>Lists</v-card-subtitle>
                             <v-card-text>
                                 <v-list>
-                                   
+                                   <v-list-item v-for="course in _courses" :key="course.id">
+                                    {{course.title}} - {{course.code}}
+                                    </v-list-item>
                                 </v-list>
                             </v-card-text>
                             <v-card-subtitle>Add new</v-card-subtitle>
@@ -237,20 +245,21 @@ export default {
             file: "file",
         },
         types: [
-            'slides', 'books'
+            'slides', 'books', 'projects'
         ],
         semstors: [
             1, 2, 3, 4, 5, 6, 7, 8
         ],
         nameRules: [
             v => !!v || 'Name is required',
-            v => (v && v.length <= 100) || 'Name must be less than 100 characters',
+            v => (v && v.length <= 1000) || 'Name must be less than 100 characters',
         ],
         classes: {
             forms: {
                 program: "", // BSSE
                 name: "", // Programming fundenmntals
                 code: "", // cs150
+                cr: "",
             },
         },
         courses: {
@@ -306,6 +315,7 @@ export default {
             this.isMsg = true
             this.msg = "Added successfully"
             this.submit = false
+            this.$refs.form.reset()
         },
         addCourse() {
             this.submit = true
@@ -315,6 +325,7 @@ export default {
             this.isMsg = true
             this.msg = "Added successfully"
             this.submit = false
+            this.$refs.form.reset()
         },
         addResource() {
             this.submit = true
@@ -324,6 +335,7 @@ export default {
             this.isMsg = true
             this.msg = "Added successfully"
             this.submit = false
+            this.$refs.form.reset()
         },
     },
     mounted() {

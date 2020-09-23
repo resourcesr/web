@@ -1,0 +1,30 @@
+.v-application--wrap {
+    background-color: #e7e8e8;
+}
+.v-window-item--active {
+    background-color: #657272;
+}
+.breadcrumbs {
+    background-color: #657272!important;
+}
+a {
+    color: #000!important;
+}
+select, option {
+    border: 1px solid black;
+}
+.department-select .cr {
+    color: #000;
+}
+.department-select:hover {
+    background-color: #e7e8e8;
+}
+.res:hover {
+    background-color: #e7e8e8;
+}
+.resource .cr {
+    color: #000;
+}
+.breadcrumb > li {
+    color: #000;
+}
