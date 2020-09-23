@@ -2,10 +2,10 @@
     background-color: #e7e8e8;
 }
 .v-window-item--active {
-    background-color: #657272;
+    background-color: #e7e8e8;
 }
 .breadcrumbs {
-    background-color: #657272!important;
+    background-color: #e7e8e8!important;
 }
 a {
     color: #000!important;
