@@ -78,6 +78,14 @@ const routes = [
         }
     },
     {
+        path: '/reset',
+        name: 'reset',
+        component: () => import('../views/Auth/reset_password.vue'),
+        meta: {
+            title: "Reset Password",
+        }
+    },
+    {
         path: '/admin',
         name: 'admin',
         component: () => import('../views/Admin.vue'),
