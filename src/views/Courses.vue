@@ -62,7 +62,7 @@ export default {
             CcourseID,
             courseName,
             department,
-            depName
+            depName,
         }
     },
     methods: {

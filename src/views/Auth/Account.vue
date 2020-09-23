@@ -11,12 +11,14 @@
                 <div class="text--primary">
                     <v-form ref="form"  v-model="valid" lazy-validation>
                          <v-text-field
+                            :disabled="submit"
                             v-model="forms.login.email"
                             :rules="emailRules"
                             label="E-mail"
                             required
                         ></v-text-field>
                         <v-text-field
+                            :disabled="submit"
                             v-model="forms.login.password"
                             :rules="passRules"
                             label="Password"
@@ -42,7 +44,7 @@
                             </div>
                             <div class="pt-10">
                                 <v-btn
-                                    :disabled="!valid || submit"
+                                    :disabled="submit"
                                     color="success"
                                     class=""
                                     @click="loginWithGoogle"
@@ -68,6 +70,7 @@
                 <div class="text--primary">
                     <v-form ref="form"  v-model="valid" lazy-validation>
                         <v-text-field
+                            :disabled="submit"
                             v-model="forms.signup.name"
                             :counter="100"
                             :rules="nameRules"
@@ -75,12 +78,14 @@
                             required
                         ></v-text-field>
                         <v-text-field
+                            :disabled="submit"
                             v-model="forms.signup.email"
                             :rules="emailRules"
                             label="E-mail"
                             required
                         ></v-text-field>
                         <v-text-field
+                            :disabled="submit"
                             v-model="forms.signup.sap"
                             :counter="6"
                             :rules="sapRules"
@@ -88,6 +93,7 @@
                             required
                         ></v-text-field>
                         <v-text-field
+                            :disabled="submit"
                             v-model="forms.signup.password"
                             :rules="passRules"
                             label="Password"
@@ -110,6 +116,18 @@
                                     Signup
                                 </v-btn>
                             </div>
+                            <div class="pt-10">
+                                <v-btn
+                                    :disabled="submit"
+                                    color="success"
+                                    class=""
+                                    @click="loginWithGoogle"
+                                    style="width:100%"
+
+                                    >
+                                    Join With Google
+                                </v-btn>
+                            </div>
                         </v-card-actions>
                     </v-form>
                 </div>
@@ -124,7 +142,7 @@
 
 <script>
 import * as firebase from 'firebase/app'
-import router from '../router/index'
+import router from '../../router/index'
 
 export default {
     data() {
@@ -179,13 +197,18 @@ export default {
             this.$refs.form.resetValidation()
         },
         loginWithGoogle() {
+            this.submit = true
             const provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithPopup(provider).then(resp => {
                 this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
-                router.push("/")
+                this.$router.push({name: "fill"})
             }).catch(err => {
                 this.isMsg = true
                 this.msg = err.message
+                this.submit = false
+            }).finally(status => {
+                this.isMsg = true
+                this.msg = status.message
                 this.submit = false
             })
         },

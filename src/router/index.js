@@ -64,13 +64,17 @@ const routes = [
   {
     path: '/account',
     name: 'account',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue'),
+    component: () => import(/* webpackChunkName: "account" */ '../views/Auth/Account.vue'),
     meta: {
       title: "Account",
-      breadcrumb: [
-        {name: "Home", route: "Home"},
-        {name: "Account"}
-      ],
+    }
+  },
+  {
+    path: '/complete/profile',
+    name: 'fill',
+    component: () => import(/* webpackChunkName: "account" */ '../views/Auth/fill.vue'),
+    meta: {
+      title: "Complete Profile",
     }
   },
   {

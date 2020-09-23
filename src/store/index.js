@@ -38,6 +38,9 @@ export default new Vuex.Store({
     },
     resources(state) {
       return state.resources
+    },
+    user: (state) => {
+      return state.userProfile
     }
   },
   actions: {
@@ -191,7 +194,7 @@ export default new Vuex.Store({
       // clear userProfile and redirect to /login
       commit('setUserProfile', {})
       localStorage.removeItem("auth")
-      router.push('/')
+      router.push({name: "account"})
     },
   },
   modules: {

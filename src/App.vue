@@ -16,7 +16,7 @@
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list-item v-if="loggedIn">
         <v-list-item-content>
-          <v-list-item-title>d</v-list-item-title>
+          <v-list-item-title>{{userProfile.name}}</v-list-item-title>
           
         </v-list-item-content><v-btn
           icon
@@ -84,24 +84,16 @@ export default {
     $route (to, from) {
         let title = "ClassR"
         if (typeof to.meta.title == "string")
-            title = to.meta.title
+            title = `${to.meta.title} - ClassR` 
         else if (typeof to.meta.title == "function")
-            title = to.meta.title(to)
-        else
-            title = "Riphah Web Resouces"
-
-        document.title = title
-        this.title = title
-        this.activeRoute = to
+            title = `${to.meta.title(to)} - ClassR`
+        document.title = title        
       },
-    ...mapState(['userProfile']),
+      
   },
   data() {
     return {
-    drawer: null,
-      breadcrumbList: [],
-      activeRoute: { meta: {}, fullPath: '' },
-
+      drawer: null,
         items: [
           { title: 'Home', icon: 'dashboard' },
           { title: 'About', icon: 'question_answer' },
@@ -142,7 +134,7 @@ export default {
     ...mapState(['userProfile']),
     loggedIn() {
       return localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined
-    }
+    },
   }
 }
 </script>
