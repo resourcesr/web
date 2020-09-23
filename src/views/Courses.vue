@@ -1,5 +1,6 @@
 <template>
     <div>
+        <breadcrumb :name_r="depName"/>
         <h3 class="title text-center">{{courseName}}</h3>
         <div v-if='courses.data.length'>
             <p class="text-center pt-5">Select your subject.</p>
@@ -9,7 +10,7 @@
                     <div v-for="course in courses.data" :key="course.id">
                         <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-if="sem == course.semstor">
                             <router-link 
-                            :to="{ path: `/res/${department}/${depName}/${course}/${courseName}/${course.id}/${course.title}`}" >
+                            :to="{ path: `/res/${department}/${depName}/${CcourseID}/${courseName}/${course.id}/${course.title}`}" >
                                 <div class='res'>
                                     <v-row no-gutters class="padding: 25px">
                                         <v-col key="1" sm="10" xs="10" md="10" xl="10" lg="10" stye='height: 100px'>
@@ -48,12 +49,17 @@
 
 <script>
 import _colorFromStr from "../utils/"
+import breadcrumb from "../components/breadcrumb"
+
 export default {
     name: 'courses',
+    components: {
+        breadcrumb
+    },
     data() {
-        const {course: course, name: courseName, department: department, dname: depName} = this.$route.params;
+        const {course: CcourseID, name: courseName, department: department, dname: depName} = this.$route.params;
         return {
-            course,
+            CcourseID,
             courseName,
             department,
             depName
@@ -65,8 +71,8 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch("getCourseById", this.course)
-        this.$store.dispatch("getCourseByProgram", this.course)
+        this.$store.dispatch("getCourseById", this.CcourseID)
+        this.$store.dispatch("getCourseByProgram", this.CcourseID)
     },
     computed: {
         courses() {

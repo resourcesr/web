@@ -40,6 +40,18 @@
                                     Login
                                 </v-btn>
                             </div>
+                            <div class="pt-10">
+                                <v-btn
+                                    :disabled="!valid || submit"
+                                    color="success"
+                                    class=""
+                                    @click="loginWithGoogle"
+                                    style="width:100%"
+
+                                    >
+                                    Login With Google
+                                </v-btn>
+                            </div>
                         </v-card-actions>
                     </v-form>
                 </div>
@@ -166,6 +178,17 @@ export default {
         resetValidation () {
             this.$refs.form.resetValidation()
         },
+        loginWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider).then(resp => {
+                this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
+                router.push("/")
+            }).catch(err => {
+                this.isMsg = true
+                this.msg = err.message
+                this.submit = false
+            })
+        },
         doLogin() {
             this.validate();
             this.isMsg = false
@@ -178,6 +201,7 @@ export default {
                         this.isMsg = true
                         this.msg = "Logged in successfully"
                         this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
+                        router.push("/")
                     },
                     (err) => {
                         this.isMsg = true

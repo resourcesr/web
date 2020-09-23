@@ -1,5 +1,6 @@
 <template>
   <div>
+        <breadcrumb name_r="ddad"/>
         <p class="text-center pt-5">Select your department.</p>
         <v-divider class="pt-5"/>
         <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-for="(department, index) in departments" :key="index">
@@ -35,8 +36,12 @@
 
 <script>
 import _colorFromStr from "../utils/"
+import breadcrumb from "../components/breadcrumb"
 export default {
   name: 'Home',
+    components: {
+        breadcrumb
+    },
     data() {
         return {
             departments: [

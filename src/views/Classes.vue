@@ -1,5 +1,6 @@
 <template>
   <div>
+    <breadcrumb :name_r="depName"/>
     <div>
         <h3 class="title text-center">Classes - {{depName}}</h3>
     </div>
@@ -41,8 +42,13 @@
 
 <script>
 import _colorFromStr from "../utils/"
+import breadcrumb from "../components/breadcrumb"
+
 export default {
   name: 'classes',
+  components: {
+    breadcrumb
+  },
   data() {
     const {department: department, dname: depName} = this.$route.params;
     return {

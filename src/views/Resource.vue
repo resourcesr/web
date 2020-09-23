@@ -1,5 +1,6 @@
 <template>
     <div>
+        <breadcrumb :name_r="Cname"/>
         <div>
             <h3 class="title text-center">{{courseName}}</h3>
         </div>
@@ -133,11 +134,17 @@
 </template>
 
 <script>
+import breadcrumb from "../components/breadcrumb"
+
 export default {
     name: 'resource',
+    components: {
+        breadcrumb
+    },
     data() {
-        const {sub: cId, subName: courseName} = this.$route.params;
+        const {name: Cname, sub: cId, subName: courseName} = this.$route.params;
         return {
+            Cname,
             cId,
             courseName,
             tab: null,

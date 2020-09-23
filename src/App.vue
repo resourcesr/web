@@ -16,7 +16,7 @@
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list-item v-if="loggedIn">
         <v-list-item-content>
-          <v-list-item-title>{{userProfile.name}}</v-list-item-title>
+          <v-list-item-title>d</v-list-item-title>
           
         </v-list-item-content><v-btn
           icon
@@ -67,22 +67,7 @@
 
     <v-app>
         <v-main>
-            <v-card tile>
-                <v-card-text>
-                    <ul class="breadcrumb">
-                    <li
-                        v-for="(breadcrumb, index) in breadcrumbList"
-                        :key="index"
-                        @click="routeTo(index)"
-                        :class="{'linked': !!breadcrumb.route}">
-                         {{name(breadcrumb.name)}}
-                        <svg v-if="index != (breadcrumbList.length - 1)" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                    </svg>
-                    </li>
-                </ul>
-                </v-card-text>
-            </v-card>
+            
         <router-view/>
       </v-main>
     </v-app>
@@ -108,9 +93,7 @@ export default {
         document.title = title
         this.title = title
         this.activeRoute = to
-        
-        this.updateList()
-    },
+      },
     ...mapState(['userProfile']),
   },
   data() {
@@ -126,13 +109,6 @@ export default {
     }
   },
   methods: {
-    name(name) {
-        if (typeof name == "string")
-            return name;
-        else if (typeof name == "function")
-            return this.activeRoute.meta.title(this.activeRoute)
-        
-    },
     userData() {
       if (localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined) {
         this.$store.dispatch("fetchUserProfile", {uid: localStorage.getItem("auth")})
@@ -158,20 +134,9 @@ export default {
         }
       })
     },
-    routeTo (pRouteTo) {
-      if (this.breadcrumbList[pRouteTo].route) {
-        this.$router.push({name: this.breadcrumbList[pRouteTo].route, params: this.activeRoute.params})
-      }
-    },
-    updateList () { 
-      this.breadcrumbList = this.$route.meta.breadcrumb
-      console.log(this.activeRoute.params)
-      }
-
   },
   mounted() {
-    this.userData(),
-    this.updateList()
+    this.userData()
   },
   computed: {
     ...mapState(['userProfile']),

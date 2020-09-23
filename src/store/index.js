@@ -58,10 +58,8 @@ export default new Vuex.Store({
       const userProfile = await fb.usersCollection.doc(user.uid).get()
 
       // set user profile in state
+      localStorage.setItem("auth", user.uid)
       commit('setUserProfile', userProfile.data())
-      
-      // change route to dashboard
-      //router.push('/')
     },
     async addClasses({commit}, form) {
       await fb.classesCollection.add({
@@ -193,7 +191,7 @@ export default new Vuex.Store({
       // clear userProfile and redirect to /login
       commit('setUserProfile', {})
       localStorage.removeItem("auth")
-      router.push('/account')
+      router.push('/')
     },
   },
   modules: {

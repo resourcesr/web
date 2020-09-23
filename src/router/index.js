@@ -25,7 +25,7 @@ const routes = [
       title: (route) => route.params.dname,
       breadcrumb: [
         {name: "Home", route: "Home"},
-        {name: (route) => route.params.dname}
+        {name: (route) => route.params.dname, last: true}
       ],
     },
   },
@@ -37,7 +37,7 @@ const routes = [
       title: (route) => route.params.name,
       breadcrumb: [
         {name: "Home", route: "Home"},
-        {name: "Classes", route: 'classes:index'},
+        {name: "Classes", route: 'classes:index', middle: true},
         {name: (route) => route.params.dname},
       ],
     },
@@ -51,7 +51,7 @@ const routes = [
       breadcrumb: [
         {name: "Home", route: "Home"},
         {name: "Classes", route: 'classes:index'},
-        {name: "Courses", route: "courses:index"},
+        {name: "Courses", route: "courses:index", middle: true},
         {name: (route) => route.params.subName},
       ],
     },
