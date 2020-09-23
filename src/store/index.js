@@ -45,7 +45,6 @@ export default new Vuex.Store({
   },
   actions: {
     async completeProfile({dispatch}, data) {
-      console.log(data)
       // create user profile object in userCollections
       await fb.usersCollection.doc(data.user.uid).set({
         name: data.form.name,
