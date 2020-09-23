@@ -3,7 +3,7 @@
         <p class="text-center pt-5">Select your department.</p>
         <v-divider class="pt-5"/>
         <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-for="(department, index) in departments" :key="index">
-            <router-link  :to="{ name: 'classes:index', params: {department: department.key, name:department.name} }">
+            <router-link  :to="{ name: 'classes:index', params: {department: department.key, dname:department.name }}">
                 <div class='res'>
                     <v-row no-gutters class="padding: 25px">
                         <v-col key="1" sm="10" xs="10" md="10" xl="10" lg="10" stye='height: 100px'>

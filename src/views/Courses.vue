@@ -8,7 +8,8 @@
                 <div style="" v-if="courses.data.length">
                     <div v-for="course in courses.data" :key="course.id">
                         <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-if="sem == course.semstor">
-                            <router-link  :to="{ name: 'courses:resources', params: {course: course.id, name:course.title} }">
+                            <router-link 
+                            :to="{ path: `/res/${department}/${depName}/${course}/${courseName}/${course.id}/${course.title}`}" >
                                 <div class='res'>
                                     <v-row no-gutters class="padding: 25px">
                                         <v-col key="1" sm="10" xs="10" md="10" xl="10" lg="10" stye='height: 100px'>
@@ -50,10 +51,12 @@ import _colorFromStr from "../utils/"
 export default {
     name: 'courses',
     data() {
-        const {course: course, name: courseName} = this.$route.params;
+        const {course: course, name: courseName, department: department, dname: depName} = this.$route.params;
         return {
-        course,
-        courseName,
+            course,
+            courseName,
+            department,
+            depName
         }
     },
     methods: {

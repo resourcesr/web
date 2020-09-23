@@ -6,7 +6,7 @@
     <div style="" v-if="pClasses.length">
       <p class="text-center pt-5">Select your class.</p>
       <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-for="cls in pClasses" :key="cls.id">
-          <router-link  :to="{ name: 'courses:index', params: {course: cls.id, name:cls.name} }">
+          <router-link  :to="{ path: `/classes/${department}/${depName}/${cls.id}/${cls.name}`}">
             <div class='res'>
               <v-row no-gutters class="padding: 25px">
                 <v-col key="1" sm="10" xs="10" md="10" xl="10" lg="10" stye='height: 100px'>
@@ -44,7 +44,7 @@ import _colorFromStr from "../utils/"
 export default {
   name: 'classes',
   data() {
-    const {department: department, name: depName} = this.$route.params;
+    const {department: department, dname: depName} = this.$route.params;
     return {
       department,
       depName,

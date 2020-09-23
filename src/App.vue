@@ -3,7 +3,7 @@
     <v-card color="grey lighten-4" flat tile>
       <v-toolbar dense>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>RIU</v-toolbar-title>
+        <v-toolbar-title>ClassR</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field
           hide-details
@@ -15,11 +15,8 @@
     </v-card>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list-item v-if="loggedIn">
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg" style="width: 100px"></v-img>
-        </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
+          <v-list-item-title>{{userProfile.name}}</v-list-item-title>
           
         </v-list-item-content><v-btn
           icon
@@ -69,7 +66,23 @@
     </v-navigation-drawer>
 
     <v-app>
-      <v-main>
+        <v-main>
+            <v-card tile>
+                <v-card-text>
+                    <ul class="breadcrumb">
+                    <li
+                        v-for="(breadcrumb, index) in breadcrumbList"
+                        :key="index"
+                        @click="routeTo(index)"
+                        :class="{'linked': !!breadcrumb.route}">
+                         {{name(breadcrumb.name)}}
+                        <svg v-if="index != (breadcrumbList.length - 1)" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                    </svg>
+                    </li>
+                </ul>
+                </v-card-text>
+            </v-card>
         <router-view/>
       </v-main>
     </v-app>
@@ -77,7 +90,6 @@
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld'
 import { mapState } from 'vuex'
 import Swal from 'sweetalert2'
 
@@ -85,19 +97,28 @@ export default {
   name: 'App',
   watch: {
     $route (to, from) {
-      if (typeof to.meta.title == "string")
-        document.title = to.meta.title
-      else if (typeof to.meta.title == "function")
-        document.title = to.meta.title(to)
-      else
-        document.title = "Riphah Web Resouces"
+        let title = "ClassR"
+        if (typeof to.meta.title == "string")
+            title = to.meta.title
+        else if (typeof to.meta.title == "function")
+            title = to.meta.title(to)
+        else
+            title = "Riphah Web Resouces"
 
+        document.title = title
+        this.title = title
+        this.activeRoute = to
+        
+        this.updateList()
     },
     ...mapState(['userProfile']),
   },
   data() {
     return {
-   drawer: null,
+    drawer: null,
+      breadcrumbList: [],
+      activeRoute: { meta: {}, fullPath: '' },
+
         items: [
           { title: 'Home', icon: 'dashboard' },
           { title: 'About', icon: 'question_answer' },
@@ -105,6 +126,13 @@ export default {
     }
   },
   methods: {
+    name(name) {
+        if (typeof name == "string")
+            return name;
+        else if (typeof name == "function")
+            return this.activeRoute.meta.title(this.activeRoute)
+        
+    },
     userData() {
       if (localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined) {
         this.$store.dispatch("fetchUserProfile", {uid: localStorage.getItem("auth")})
@@ -129,10 +157,21 @@ export default {
           this.$store.dispatch("logout")
         }
       })
-    }
+    },
+    routeTo (pRouteTo) {
+      if (this.breadcrumbList[pRouteTo].route) {
+        this.$router.push({name: this.breadcrumbList[pRouteTo].route, params: this.activeRoute.params})
+      }
+    },
+    updateList () { 
+      this.breadcrumbList = this.$route.meta.breadcrumb
+      console.log(this.activeRoute.params)
+      }
+
   },
   mounted() {
-    this.userData()
+    this.userData(),
+    this.updateList()
   },
   computed: {
     ...mapState(['userProfile']),

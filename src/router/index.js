@@ -9,30 +9,51 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
-  },
-  {
-    path: '/classes/:department/:name',
-    name: 'classes:index',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Classes.vue'),
+    component: Home,
     meta: {
-      title: (route) => route.params.name,
+      title: "Home",
+      breadcrumb: [
+        {name: "Home"}
+      ],
     },
   },
   {
-    path: '/classes/courses/:course/:name',
+    path: '/classes/:department/:dname',
+    name: 'classes:index',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Classes.vue'),
+    meta: {
+      title: (route) => route.params.dname,
+      breadcrumb: [
+        {name: "Home", route: "Home"},
+        {name: (route) => route.params.dname}
+      ],
+    },
+  },
+  {
+    path: '/classes/:department/:dname/:course/:name',
     name: 'courses:index',
     component: () => import(/* webpackChunkName: "about" */ '../views/Courses.vue'),
     meta: {
       title: (route) => route.params.name,
+      breadcrumb: [
+        {name: "Home", route: "Home"},
+        {name: "Classes", route: 'classes:index'},
+        {name: (route) => route.params.dname},
+      ],
     },
   },
   {
-    path: '/courses/:course/:name',
+    path: '/res/:department/:dname/:course/:name/:sub/:subName',
     name: 'courses:resources',
     component: () => import(/* webpackChunkName: "about" */ '../views/Resource.vue'),
     meta: {
-      title: (route) => route.params.name,
+      title: (route) => route.params.subName,
+      breadcrumb: [
+        {name: "Home", route: "Home"},
+        {name: "Classes", route: 'classes:index'},
+        {name: "Courses", route: "courses:index"},
+        {name: (route) => route.params.subName},
+      ],
     },
   },
   {
@@ -43,7 +64,14 @@ const routes = [
   {
     path: '/account',
     name: 'account',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue')
+    component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue'),
+    meta: {
+      title: "Account",
+      breadcrumb: [
+        {name: "Home", route: "Home"},
+        {name: "Account"}
+      ],
+    }
   },
   {
     path: '/admin',
@@ -51,7 +79,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "admin" */ '../views/Admin.vue'),
     meta: {
       requiresAuth: true,
-      title: "Admistrator"
+      title: "Admistrator",
+      breadcrumb: [
+        {name: "Home", route: "Home"},
+        {name: "Admin"}
+      ],
     }
   }
 ]

@@ -136,7 +136,7 @@
 export default {
     name: 'resource',
     data() {
-        const {course: cId, name: courseName} = this.$route.params;
+        const {sub: cId, subName: courseName} = this.$route.params;
         return {
             cId,
             courseName,
