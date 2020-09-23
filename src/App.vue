@@ -5,7 +5,7 @@
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>
                     <router-link :to="{ name: 'Home' }">
-                        ClassR
+                        ResourceR
                     </router-link>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
@@ -16,7 +16,7 @@
                                 <v-icon class="mr-1">mdi-moon-waxing-crescent</v-icon>
                             </v-btn>
                         </template>
-                        <span>Dark Mode On</span>
+                        <span>On</span>
                     </v-tooltip>
                     <v-tooltip v-else bottom>
                         <template v-slot:activator="{ on }">
@@ -24,7 +24,7 @@
                                 <v-icon color="yellow">mdi-white-balance-sunny</v-icon>
                             </v-btn>
                         </template>
-                        <span>Dark Mode Off</span>
+                        <span>Off</span>
                     </v-tooltip>
                 </div>
             </v-toolbar>
