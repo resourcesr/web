@@ -16,7 +16,7 @@
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list-item v-if="loggedIn">
         <v-list-item-content>
-          <v-list-item-title>{{userProfile.name}}</v-list-item-title>
+          <v-list-item-title v-if="userProfile.name">{{userProfile.name}}</v-list-item-title>
           
         </v-list-item-content><v-btn
           icon
