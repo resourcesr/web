@@ -3,7 +3,11 @@
     <v-card color="grey lighten-4" flat tile>
       <v-toolbar dense>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>ClassR</v-toolbar-title>
+        <v-toolbar-title>
+          <router-link :to="{ name: 'Home' }">
+            ClassR
+          </router-link>
+        </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field
           hide-details

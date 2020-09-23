@@ -42,7 +42,10 @@
                                     Login
                                 </v-btn>
                             </div>
-                            <div class="pt-10">
+                            <div class="pt-2">
+                                <p class="text-center">OR</p>
+                            </div>
+                            <div>
                                 <v-btn
                                     :disabled="submit"
                                     color="success"
@@ -50,7 +53,7 @@
                                     @click="loginWithGoogle"
                                     style="width:100%"
 
-                                    >
+                                    ><v-icon>mdi-google</v-icon> 
                                     Login With Google
                                 </v-btn>
                             </div>
@@ -116,7 +119,10 @@
                                     Signup
                                 </v-btn>
                             </div>
-                            <div class="pt-10">
+                            <div class="pt-2">
+                                <p class="text-center">OR</p>
+                            </div>
+                            <div>
                                 <v-btn
                                     :disabled="submit"
                                     color="success"
@@ -124,7 +130,7 @@
                                     @click="loginWithGoogle"
                                     style="width:100%"
 
-                                    >
+                                    ><v-icon>mdi-google</v-icon> 
                                     Join With Google
                                 </v-btn>
                             </div>
