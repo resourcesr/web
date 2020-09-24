@@ -30,7 +30,7 @@
             </v-toolbar>
         </v-card>
         <v-navigation-drawer v-model="drawer" absolute temporary>
-            <v-list-item v-if="loggedIn">
+            <v-list-item v-if="userProfile.uid">
                 <v-list-item-content>
                     <v-list-item-title v-if="userProfile.name">{{userProfile.name}}</v-list-item-title>
                     </v-list-item-content>
@@ -54,17 +54,17 @@
                         <router-link :to="{ name: 'admin' }"><v-icon>home</v-icon> Admistrator</router-link>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="!loggedIn">
+                <v-list-item link v-if="userProfile.uid">
                 <v-list-item-content>
                     <router-link :to="{ name: 'account' }"><v-icon>home</v-icon> Account</router-link>
                 </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="loggedIn">
+                <v-list-item link v-if="userProfile.uid">
                 <v-list-item-content>
                     <router-link :to="{ name: 'forum' }"><v-icon>home</v-icon> Timetale</router-link>
                 </v-list-item-content>
                 </v-list-item>
-                <v-list-item link v-if="loggedIn">
+                <v-list-item link v-if="userProfile.uid">
                 <v-list-item-content>
                     <p @click="logout"><v-icon>home</v-icon> Logout</p>
                 </v-list-item-content>
