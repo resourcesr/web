@@ -16,7 +16,7 @@
                 </li>
             </ul>
             </v-card-text>
-        </v-card>
+        </v-card>  
     </div>
 </template>
 

@@ -12,7 +12,7 @@
                     <v-tooltip v-if="!$vuetify.theme.dark" bottom>
                         <template v-slot:activator="{ on }">
                             <v-btn v-on="on" color="light" small fab @click="darkMode">
-                                <v-icon class="mr-1">mdi-moon-waxing-crescent</v-icon>
+                                <v-icon  class="mr-1">mdi-moon-waxing-crescent</v-icon>
                             </v-btn>
                         </template>
                         <span>On</span>
@@ -20,21 +20,32 @@
                     <v-tooltip v-else bottom>
                         <template v-slot:activator="{ on }">
                             <v-btn v-on="on" color="dark" small fab @click="darkMode">
-                                <v-icon color="yellow">mdi-white-balance-sunny</v-icon>
+                                <v-icon color="white">mdi-white-balance-sunny</v-icon>
                             </v-btn>
                         </template>
                         <span>Off</span>
                     </v-tooltip>
                 </div>
-                <div v-if="userProfile.name">
-                    <v-menu  :rounded="rounded" offset-y>
+                <span class="pt-5"></span>
+                <div class="mobile-only pl-5">
+                    <v-menu>
                         <template v-slot:activator="{ attrs, on }">
-                            <v-avatar v-bind="attrs"  v-on="on">
-                                <img  src="https://cdn.vuetifyjs.com/images/john.jpg"  alt="John"  > 
+                            <v-avatar v-bind="attrs"  v-on="on" size="46">
+                                <img  src="/img/icons/user.jpg"  alt="John"  > 
                             </v-avatar>
                             
                         </template>
                         <v-list dense>
+                            <v-list-item two-line v-if="userProfile.name">
+                                <v-list-item-avatar>
+                                    <img src="/img/icons/user.jpg">
+                                </v-list-item-avatar>
+                                <v-list-item-content>
+                                    <v-list-item-title>{{userProfile.name}}</v-list-item-title>
+                                    <v-list-item-subtitle>{{userProfile.role}}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-divider></v-divider>
                             <v-list-item link>
                                 <v-list-item-content>
                                     <router-link :to="{ name: 'Home' }"><v-icon>home</v-icon> Home</router-link>
@@ -66,6 +77,7 @@
             </v-toolbar>
         </v-card>
         <v-app>
+
             <v-main> 
                 <router-view />
             </v-main>
@@ -75,29 +87,22 @@
 
 <script>
 import { mapState } from 'vuex'
-import Swal from 'sweetalert2'
 
 export default {
     name: 'App',
     watch: {
         $route (to, from) {
-            let title = "ClassR"
+            let title = "ResourceR"
             if (typeof to.meta.title == "string")
-                title = `${to.meta.title} - ClassR` 
+                title = `${to.meta.title} - ResourceR` 
             else if (typeof to.meta.title == "function")
-                title = `${to.meta.title(to)} - ClassR`
+                title = `${to.meta.title(to)} - ResourceR`
             document.title = title        
         },
     },
     data() {
         return {
             drawer: null,
-      btns: [
-        ['Removed', '0'],
-      ],
-      colors: ['deep-purple accent-4', 'error', 'teal darken-1'],
-      items: [...Array(4)].map((_, i) => `Item ${i}`),
-
         }
     },
     methods: {
@@ -107,24 +112,7 @@ export default {
             }
         },
         logout() {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You are going to logot!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, logout!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                Swal.fire(
-                    'Done!',
-                    'You have been logged out.',
-                    'success'
-                )
-                this.$store.dispatch("logout")
-                }
-            })
+            this.$store.dispatch("logout")
         },
         deleteCSS(css) {
             let elem = document.querySelector(".custom-css-appended")

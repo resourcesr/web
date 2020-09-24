@@ -147,5 +147,39 @@ select, option {
     font-size: 1em;
     font-weight: bold;
 }
+.desktop-header {
+    padding: 13px;
+}
+.page {
+    margin-top: -350px;
+}
+.mobile-only {
+    display: none;
+}
+@media only screen and (max-width: 1580px) {
+    .page {
+        margin-left: 150px;
+    }
+}
+@media only screen and (max-width: 1400px) {
+    .page {
+        margin-left: 250px;
+    }
+}
 @media only screen and (max-width: 1380px) {
+    .desktop-header {
+        display: none;
+        padding: 0px;
+    }
+    .page {
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    .mobile-only {
+        display: inline;
+    }
+    .v-menu__content {
+        top: 50px!important;
+    }
+
 }

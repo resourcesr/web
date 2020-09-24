@@ -1,39 +1,42 @@
 <template>
     <div>
     <br />
-        <v-card class="mx-auto" max-width="600" tile>
-            <v-card-text>
-                <div>
-                    <h3 class="title text--primary text-center">Reset Password</h3>
-                    <p class="text-center">Enter your email to reset your password.</p>
-                    <v-divider />
-                </div>
-                <div class="text--primary">
-                    <v-form ref="form">
-                         <v-text-field
-                            :disabled="submit"
-                            v-model="forms.email"
-                            label="E-mail"
-                            required
-                        ></v-text-field>
-                        <v-card-actions style="display: block" class="pt-2">
-                            <div>
-                                <v-btn
-                                    :disabled="submit"
-                                    color="success"
-                                    class=""
-                                    @click="doReset"
-                                    style="width:100%"
+    <dHeader /> 
+        <div class="page">
+            <v-card class="mx-auto" max-width="600" tile>
+                <v-card-text>
+                    <div>
+                        <h3 class="title text--primary text-center">Reset Password</h3>
+                        <p class="text-center">Enter your email to reset your password.</p>
+                        <v-divider />
+                    </div>
+                    <div class="text--primary">
+                        <v-form ref="form">
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.email"
+                                label="E-mail"
+                                required
+                            ></v-text-field>
+                            <v-card-actions style="display: block" class="pt-2">
+                                <div>
+                                    <v-btn
+                                        :disabled="submit"
+                                        color="success"
+                                        class=""
+                                        @click="doReset"
+                                        style="width:100%"
 
-                                    >
-                                    Reset
-                                </v-btn>
-                            </div>
-                        </v-card-actions>
-                    </v-form>
-                </div>
-            </v-card-text>
-        </v-card>
+                                        >
+                                        Reset
+                                    </v-btn>
+                                </div>
+                            </v-card-actions>
+                        </v-form>
+                    </div>
+                </v-card-text>
+            </v-card>
+        </div>
         <v-snackbar v-model="isMsg">{{ msg }} </v-snackbar>
     </div>
 
@@ -42,8 +45,12 @@
 <script>
 import { auth } from '../../firebase';
 import router from '../../router/index'
+import dHeader from "../../components/dHeader"
 
 export default {
+    components: {
+        dHeader
+    },
     data() {
         return {
             submit: false,
@@ -56,7 +63,6 @@ export default {
     },
     methods: {
         doReset() {
-            console.log(this.forms)
             auth.sendPasswordResetEmail(this.forms.email).then(resp => {
                 this.submit = false
             }).catch(err => {

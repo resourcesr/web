@@ -1,145 +1,147 @@
 <template>
     <div>
     <br />
-        <v-card class="mx-auto" max-width="600" v-if="showLoginForm" tile>
-            <v-card-text>
-                <div>
-                    <h3 class="title text--primary text-center">Get Started</h3>
-                    <p class="text-center">Please enter the following detail to get started</p>
-                    <v-divider />
-                </div>
-                <div class="text--primary">
-                    <v-form ref="form"  v-model="valid" lazy-validation>
-                         <v-text-field
-                            :disabled="submit"
-                            v-model="forms.login.email"
-                            :rules="emailRules"
-                            label="E-mail"
-                            required
-                        ></v-text-field>
-                        <v-text-field
-                            :disabled="submit"
-                            v-model="forms.login.password"
-                            :rules="passRules"
-                            label="Password"
-                            required
-                            type="password"
-                        ></v-text-field>
-                        <v-card-actions style="display: block" class="pt-2">
-                            <div class="">
-                                <a href="#!" @click="toggleForm" style="float:left">Don't have account?</a>
-                                <a href="#!" style="float:right"><router-link :to="{ name: 'reset' }">Forget Password?</router-link></a>
-                            </div>
-                            <div class="pt-10">
-                                <v-btn
-                                    :disabled="!valid || submit"
-                                    color="success"
-                                    class=""
-                                    @click="doLogin"
-                                    style="width:100%"
+    <dHeader /> 
+        <div class="page">
+            <v-card class="mx-auto" max-width="600" v-if="showLoginForm" tile>
+                <v-card-text>
+                    <div>
+                        <h3 class="title text--primary text-center">Get Started</h3>
+                        <p class="text-center">Please enter the following detail to get started</p>
+                        <v-divider />
+                    </div>
+                    <div class="text--primary">
+                        <v-form ref="form"  v-model="valid" lazy-validation>
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.login.email"
+                                :rules="emailRules"
+                                label="E-mail"
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.login.password"
+                                :rules="passRules"
+                                label="Password"
+                                required
+                                type="password"
+                            ></v-text-field>
+                            <v-card-actions style="display: block" class="pt-2">
+                                <div class="">
+                                    <a href="#!" @click="toggleForm" style="float:left">Don't have account?</a>
+                                    <a href="#!" style="float:right"><router-link :to="{ name: 'reset' }">Forget Password?</router-link></a>
+                                </div>
+                                <div class="pt-10">
+                                    <v-btn
+                                        :disabled="!valid || submit"
+                                        color="success"
+                                        class=""
+                                        @click="doLogin"
+                                        style="width:100%"
 
-                                    >
-                                    Login
-                                </v-btn>
-                            </div>
-                            <div class="pt-2">
-                                <p class="text-center">OR</p>
-                            </div>
-                            <div>
-                                <v-btn
-                                    :disabled="submit"
-                                    color="success"
-                                    class=""
-                                    @click="loginWithGoogle"
-                                    style="width:100%"
+                                        >
+                                        Login
+                                    </v-btn>
+                                </div>
+                                <div class="pt-2">
+                                    <p class="text-center">OR</p>
+                                </div>
+                                <div>
+                                    <v-btn
+                                        :disabled="submit"
+                                        color="success"
+                                        class=""
+                                        @click="loginWithGoogle"
+                                        style="width:100%"
 
-                                    ><v-icon>mdi-google</v-icon> 
-                                    Login With Google
-                                </v-btn>
-                            </div>
-                        </v-card-actions>
-                    </v-form>
-                </div>
-            </v-card-text>
+                                        ><v-icon>mdi-google</v-icon> 
+                                        Login With Google
+                                    </v-btn>
+                                </div>
+                            </v-card-actions>
+                        </v-form>
+                    </div>
+                </v-card-text>
 
-        </v-card>
-        <v-card class="mx-auto" max-width="600" v-if="!showLoginForm">
-            <v-card-text>
-                <div>
-                    <h3 class="title text--primary text-center">Get Started</h3>
-                    <p class="text-center">Please enter the following detail to get started</p>
-                    <v-divider />
-                </div>
-                <div class="text--primary">
-                    <v-form ref="form"  v-model="valid" lazy-validation>
-                        <v-text-field
-                            :disabled="submit"
-                            v-model="forms.signup.name"
-                            :counter="100"
-                            :rules="nameRules"
-                            label="Name"
-                            required
-                        ></v-text-field>
-                        <v-text-field
-                            :disabled="submit"
-                            v-model="forms.signup.email"
-                            :rules="emailRules"
-                            label="E-mail"
-                            required
-                        ></v-text-field>
-                        <v-text-field
-                            :disabled="submit"
-                            v-model="forms.signup.sap"
-                            :counter="6"
-                            :rules="sapRules"
-                            label="SAP"
-                            required
-                        ></v-text-field>
-                        <v-text-field
-                            :disabled="submit"
-                            v-model="forms.signup.password"
-                            :rules="passRules"
-                            label="Password"
-                            required
-                            type="password"
-                        ></v-text-field>
-                        <v-card-actions style="display: block" class="pt-2">
-                            <div class="">
-                                <a href="#!" @click="toggleForm" style="float:left">Back to login?</a>
-                            </div>
-                            <div class="pt-10">
-                                <v-btn
-                                    :disabled="!valid || submit"
-                                    color="success"
-                                    class=""
-                                    @click="doSignup"
-                                    style="width:100%"
+            </v-card>
+            <v-card class="mx-auto" max-width="600" v-if="!showLoginForm">
+                <v-card-text>
+                    <div>
+                        <h3 class="title text--primary text-center">Get Started</h3>
+                        <p class="text-center">Please enter the following detail to get started</p>
+                        <v-divider />
+                    </div>
+                    <div class="text--primary">
+                        <v-form ref="form"  v-model="valid" lazy-validation>
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.signup.name"
+                                :counter="100"
+                                :rules="nameRules"
+                                label="Name"
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.signup.email"
+                                :rules="emailRules"
+                                label="E-mail"
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.signup.sap"
+                                :counter="6"
+                                :rules="sapRules"
+                                label="SAP"
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.signup.password"
+                                :rules="passRules"
+                                label="Password"
+                                required
+                                type="password"
+                            ></v-text-field>
+                            <v-card-actions style="display: block" class="pt-2">
+                                <div class="">
+                                    <a href="#!" @click="toggleForm" style="float:left">Back to login?</a>
+                                </div>
+                                <div class="pt-10">
+                                    <v-btn
+                                        :disabled="!valid || submit"
+                                        color="success"
+                                        class=""
+                                        @click="doSignup"
+                                        style="width:100%"
 
-                                    >
-                                    Signup
-                                </v-btn>
-                            </div>
-                            <div class="pt-2">
-                                <p class="text-center">OR</p>
-                            </div>
-                            <div>
-                                <v-btn
-                                    :disabled="submit"
-                                    color="success"
-                                    class=""
-                                    @click="loginWithGoogle"
-                                    style="width:100%"
+                                        >
+                                        Signup
+                                    </v-btn>
+                                </div>
+                                <div class="pt-2">
+                                    <p class="text-center">OR</p>
+                                </div>
+                                <div>
+                                    <v-btn
+                                        :disabled="submit"
+                                        color="success"
+                                        class=""
+                                        @click="loginWithGoogle"
+                                        style="width:100%"
 
-                                    ><v-icon>mdi-google</v-icon> 
-                                    Join With Google
-                                </v-btn>
-                            </div>
-                        </v-card-actions>
-                    </v-form>
-                </div>
-            </v-card-text>
-        </v-card>
-
+                                        ><v-icon>mdi-google</v-icon> 
+                                        Join With Google
+                                    </v-btn>
+                                </div>
+                            </v-card-actions>
+                        </v-form>
+                    </div>
+                </v-card-text>
+            </v-card>
+        </div>
         <v-snackbar v-model="isMsg">{{ msg }} </v-snackbar>
 
     </div>
@@ -149,8 +151,12 @@
 <script>
 import * as firebase from 'firebase/app'
 import router from '../../router/index'
+import dHeader from "../../components/dHeader"
 
 export default {
+    components: {
+        dHeader
+    },
     data() {
         return {
             valid: true,

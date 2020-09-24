@@ -1,48 +1,52 @@
 <template>
     <div>
-    <v-card class="mx-auto" max-width="600">
-        <v-card-text>
-            <div>
-                <h3 class="title text--primary text-center">Complete your profile</h3>
-                <p class="text-center">Complete your profile to get started</p>
-                <v-divider />
-            </div>
-            <div class="text--primary">
-                <v-form ref="form"  v-model="valid" lazy-validation>
-                    <v-text-field
-                        :disabled="submit"
-                        v-model="forms.name"
-                        :counter="100"
-                        :rules="nameRules"
-                        label="Name"
-                        required
-                    ></v-text-field>
-                    <v-text-field
-                        :disabled="submit"
-                        v-model="forms.sap"
-                        :counter="6"
-                        :rules="sapRules"
-                        label="SAP"
-                        required
-                    ></v-text-field>
-                    <v-card-actions style="display: block" class="pt-2">
-                        <div class="pt-10">
-                            <v-btn
-                                :disabled="!valid || submit"
-                                color="success"
-                                class=""
-                                @click="doSignup"
-                                style="width:100%"
+    <br>
+    <dHeader /> 
+        <div class="page">
+            <v-card class="mx-auto" max-width="600">
+                <v-card-text>
+                    <div>
+                        <h3 class="title text--primary text-center">Complete your profile</h3>
+                        <p class="text-center">Complete your profile to get started</p>
+                        <v-divider />
+                    </div>
+                    <div class="text--primary">
+                        <v-form ref="form"  v-model="valid" lazy-validation>
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.name"
+                                :counter="100"
+                                :rules="nameRules"
+                                label="Name"
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                :disabled="submit"
+                                v-model="forms.sap"
+                                :counter="6"
+                                :rules="sapRules"
+                                label="SAP"
+                                required
+                            ></v-text-field>
+                            <v-card-actions style="display: block" class="pt-2">
+                                <div class="pt-10">
+                                    <v-btn
+                                        :disabled="!valid || submit"
+                                        color="success"
+                                        class=""
+                                        @click="doSignup"
+                                        style="width:100%"
 
-                                >
-                                Submit
-                            </v-btn>
-                        </div>
-                    </v-card-actions>
-                </v-form>
-            </div>
-        </v-card-text>
-    </v-card>
+                                        >
+                                        Submit
+                                    </v-btn>
+                                </div>
+                            </v-card-actions>
+                        </v-form>
+                    </div>
+                </v-card-text>
+            </v-card>
+        </div>
     <v-snackbar v-model="isMsg">{{ msg }} </v-snackbar>
     </div>
 
@@ -51,8 +55,12 @@
 <script>
 import * as firebase from 'firebase/app'
 import router from '../../router/index'
+import dHeader from "../../components/dHeader"
 
 export default {
+    components: {
+        dHeader
+    },
     data() {
         return {
             valid: true,
