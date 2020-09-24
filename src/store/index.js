@@ -181,6 +181,7 @@ export default new Vuex.Store({
         openUrl: form.openUrl,
         downloadUrl: form.downloadUrl,
         type: form.type,
+        content: form.content,
       })
     },
     async getResourcesByCourse({commit}, course) {

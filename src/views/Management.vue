@@ -13,15 +13,8 @@
                     <v-tab tab='resources'>
                         Resources
                     </v-tab>
-                    <v-tab tab='tasks'>
-                        Tasks
-                    </v-tab>
-                    <v-tab tab='labs'>
-                        Labs
-                    </v-tab>
                 </v-tabs>
                 <v-divider />
-
                 <v-tabs-items v-model="tab">
                     <v-tab-item tab='classes'>
                         <v-card flat>
@@ -197,6 +190,10 @@
                                             <select class="v-select__selections" v-model="resources.forms.type">
                                                 <option v-for="(item, index) in types" :key="index" :value="item">{{item}}</option>
                                             </select>
+                                            <label class="label-custom">Select Content Type</label>
+                                            <select class="v-select__selections" v-model="resources.forms.content">
+                                                <option v-for="(item, index) in contents" :key="index" :value="item">{{item}}</option>
+                                            </select>
                                             <v-card-actions>
                                                 <v-btn
                                                     :disabled="!valid || submit"
@@ -247,6 +244,9 @@ export default {
         types: [
             'slides', 'books', 'projects'
         ],
+        contents: [
+            'resource', 'assignment', 'quiz', 'lab',
+        ],
         semstors: [
             1, 2, 3, 4, 5, 6, 7, 8
         ],
@@ -281,27 +281,7 @@ export default {
                 openUrl: "",
                 downloadUrl: "",
                 type: "",
-            },
-        },
-        tasks: {
-            forms: {
-                course_id: "", // class id
-                name: "", // Programming fundenmntals
-                icon: "",
-                link: "",
-                download: "",
-            },
-        },
-        labs: {
-            forms: {
-                course_id: "", // class id
-                name: "", // Programming fundenmntals
-                code: "", // cs150
-                date: null, // date
-                user_id: "", // Id
-                icon: "",
-                link: "",
-                download: "",
+                content: "",
             },
         },
       }
