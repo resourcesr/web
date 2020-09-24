@@ -1,5 +1,5 @@
 <template>
-    <v-app class="test">
+    <v-app>
         <v-card color="grey lighten-4" flat tile>
             <v-toolbar dense>
                 <v-toolbar-title>
@@ -35,49 +35,12 @@
                             </v-avatar>
                             
                         </template>
-                        <v-list dense>
-                            <v-list-item two-line v-if="userProfile.name">
-                                <v-list-item-avatar>
-                                    <img src="/img/icons/user.jpg">
-                                </v-list-item-avatar>
-                                <v-list-item-content>
-                                    <v-list-item-title>{{userProfile.name}}</v-list-item-title>
-                                    <v-list-item-subtitle>{{userProfile.role}}</v-list-item-subtitle>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-divider></v-divider>
-                            <v-list-item link>
-                                <v-list-item-content>
-                                    <router-link :to="{ name: 'Home' }"><v-icon>home</v-icon> Home</router-link>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item link v-if="userProfile.role && userProfile.role=='admin'">
-                                <v-list-item-content>
-                                    <router-link :to="{ name: 'admin' }"><v-icon>mdi-account-plus</v-icon> Admistrator</router-link>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item link v-if="!userProfile.name">
-                                <v-list-item-content>
-                                    <router-link :to="{ name: 'account' }"><v-icon>mdi-account</v-icon> Account</router-link>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item link v-if="userProfile.name">
-                                <v-list-item-content>
-                                    <router-link :to="{ name: 'profile' }"><v-icon>mdi-account</v-icon> profile</router-link>
-                                </v-list-item-content>
-                            </v-list-item>
-                            <v-list-item link v-if="userProfile.name">
-                                <v-list-item-content>
-                                    <p @click="logout"><v-icon>mdi-logout</v-icon> Logout</p>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-list>
+                        <navbar />
                     </v-menu>
                 </div>
             </v-toolbar>
         </v-card>
         <v-app>
-
             <v-main> 
                 <router-view />
             </v-main>
@@ -87,9 +50,13 @@
 
 <script>
 import { mapState } from 'vuex'
+import navbar from "./components/navbar"
 
 export default {
     name: 'App',
+    components: {
+        navbar,
+    },
     watch: {
         $route (to, from) {
             let title = "ResourceR"
