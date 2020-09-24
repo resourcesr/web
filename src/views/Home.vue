@@ -42,7 +42,7 @@ import _colorFromStr from "../utils/"
 import breadcrumb from "../components/breadcrumb"
 import dHeader from "../components/dHeader"
 export default {
-  name: 'Home',
+    name: 'Home',
     components: {
         breadcrumb,
         dHeader

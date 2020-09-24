@@ -4,6 +4,9 @@
         <div v-if="user.role == 'admin'">
             <v-card>
                 <v-tabs v-model="tab">
+                     <v-tab tab='acconce'>
+                        Announcements
+                    </v-tab>
                     <v-tab tab='classes'>
                         Classes
                     </v-tab>
@@ -16,6 +19,44 @@
                 </v-tabs>
                 <v-divider />
                 <v-tabs-items v-model="tab">
+                    <v-tab-item tab="acconce">
+                        <v-card flat>
+                            <v-card-title>Announcements</v-card-title>
+                            <v-card-subtitle>Add new</v-card-subtitle>
+                            <v-card class="mx-auto" tile >
+                                <v-card-text>
+                                    <div class="text--primary">
+                                        <v-form ref="form"  v-model="valid" lazy-validation>
+                                            <v-text-field
+                                                v-model="announcement.forms.title"
+                                                :rules="nameRules"
+                                                label="Title"
+                                                required
+                                            ></v-text-field>
+                                            <v-textarea
+                                                v-model="announcement.forms.msg"
+                                                :rules="nameRules"
+                                                filled
+                                                name="Message"
+                                                label="Message"
+                                            ></v-textarea>
+                                            <v-card-actions>
+                                                <v-btn
+                                                    :disabled="!valid || submit"
+                                                    color="success"
+                                                    class="mr-4"
+                                                    @click="addAnnouncement"
+                                                    style="float:right;"
+                                                    >
+                                                    Add
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-form>
+                                    </div>
+                                </v-card-text>
+                            </v-card>
+                        </v-card>
+                    </v-tab-item>
                     <v-tab-item tab='classes'>
                         <v-card flat>
                             <v-card-title>Classes</v-card-title>
@@ -254,18 +295,24 @@ export default {
             v => !!v || 'Name is required',
             v => (v && v.length <= 1000) || 'Name must be less than 100 characters',
         ],
+        announcement: {
+            forms: {
+                title: "",
+                msg: "",
+            }
+        },
         classes: {
             forms: {
-                program: "", // BSSE
-                name: "", // Programming fundenmntals
-                code: "", // cs150
+                program: "",
+                name: "",
+                code: "",
                 cr: "",
             },
         },
         courses: {
             forms: {
-                class_id: "", // Programming fundenmntals
-                title: "", //title
+                class_id: "",
+                title: "",
                 semstor: "",
                 teacher: "",
                 code: "",
@@ -275,8 +322,8 @@ export default {
         },
         resources: {
             forms: {
-                course_id: "", // class id
-                name: "", // Programming fundenmntals
+                course_id: "",
+                name: "",
                 icon: "",
                 openUrl: "",
                 downloadUrl: "",
@@ -287,6 +334,14 @@ export default {
       }
     },
     methods: {
+        addAnnouncement() {
+            this.submit = true
+            if (this.valid) {
+                this.$store.dispatch("addAnnouncement", this.announcement.forms)
+            }
+            this.submit = false
+            this.$refs.form.reset()
+        },
         addClasses() {
             this.submit = true
             if (this.valid) {
@@ -319,6 +374,7 @@ export default {
         },
     },
     mounted() {
+        this.$store.dispatch("fetchAnnouncement")
         this.$store.dispatch("getClasses")
         this.$store.dispatch("getAllCourses")
     },
@@ -334,6 +390,9 @@ export default {
         },
         _courses() {
             return this.$store.getters.courses
+        },
+        announcements() {
+            return this.$store.getters.announcements
         }
     }
 }

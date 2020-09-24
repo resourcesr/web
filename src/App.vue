@@ -11,20 +11,27 @@
                 <div>
                     <v-tooltip v-if="!$vuetify.theme.dark" bottom>
                         <template v-slot:activator="{ on }">
-                            <v-btn v-on="on" color="light" small fab @click="darkMode">
-                                <v-icon  class="mr-1">mdi-moon-waxing-crescent</v-icon>
-                            </v-btn>
+                            <a v-on="on"    @click="darkMode"><v-icon  class="mr-1">mdi-moon-waxing-crescent</v-icon></a>
                         </template>
                         <span>On</span>
                     </v-tooltip>
                     <v-tooltip v-else bottom>
                         <template v-slot:activator="{ on }">
-                            <v-btn v-on="on" color="dark" small fab @click="darkMode">
-                                <v-icon color="white">mdi-white-balance-sunny</v-icon>
-                            </v-btn>
+                            <a v-on="on" @click="darkMode" color="white"><v-icon  class="mr-1">mdi-white-balance-sunny</v-icon></a>
                         </template>
                         <span>Off</span>
                     </v-tooltip>
+                </div>
+                <span class="pt-5"></span>
+                <div>
+                    <span class="pt-5"></span>
+                    <div class="pl-5">
+                        <router-link :to="{ name: 'accouncement' }">
+                            <v-badge left top color="green"  :content="announcements" >       
+                                <v-icon  class="mr-1">mdi-bell-ring</v-icon>
+                            </v-badge>
+                        </router-link>
+                    </div>
                 </div>
                 <span class="pt-5"></span>
                 <div class="mobile-only pl-5">
@@ -106,12 +113,20 @@ export default {
         },
     },
     mounted() {
-        this.userData()
+        this.userData(),
+        this.$store.dispatch("fetchAnnouncement")
     },
     computed: {
         ...mapState(['userProfile']),
         loggedIn() {
-        return localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined
+            return localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined
+        },
+        announcements() {
+            let announcements = this.$store.getters.announcements
+            if (Object.keys(announcements).length) 
+                return Object.keys(announcements).length
+            else
+                return 0
         },
     }
 }

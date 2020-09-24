@@ -96,7 +96,20 @@ const routes = [
                 {name: "Admin"}
             ],
         }
-    }
+    },
+    {
+        path: '/accouncement',
+        name: 'accouncement',
+        component: () => import('../views/Accouncement.vue'),
+        meta: {
+            requiresAuth: true,
+            title: "Accouncement",
+            breadcrumb: [
+                {name: "Home", route: "Home"},
+                {name: "Accouncement"}
+            ],
+        }
+    },
 ]
 
 const router = new VueRouter({

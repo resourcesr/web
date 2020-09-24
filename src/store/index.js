@@ -10,7 +10,8 @@ export default new Vuex.Store({
     userProfile: {},
     pClasses: {},
     courses: {},
-    resources: {}
+    resources: {},
+    announcements: {}
   },
   mutations: {
     setUserProfile(state, val) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     setResources(state, val) {
       state.resources = val
+    },
+    setAnnouncement(state, val) {
+      state.announcements = val
     }
   },
   getters: {
@@ -41,6 +45,9 @@ export default new Vuex.Store({
     },
     user: (state) => {
       return state.userProfile
+    },
+    announcements: (state) => {
+      return state.announcements
     }
   },
   actions: {
@@ -199,6 +206,26 @@ export default new Vuex.Store({
         let _types = [...new Set(types)];
         commit('setResources', {data: resArray, types:_types})
       })
+    },
+    async addAnnouncement({dispatch}, form) {
+      const userProfile = await fb.usersCollection.doc(fb.auth.currentUser.uid).get()
+      await fb.database.ref('announcement').push(
+        {
+          created: Date.now(),
+          userName: userProfile.data().name,
+          title: form.title,
+          msg: form.msg,
+        }
+      )
+      dispatch('fetchAnnouncement')
+    },
+    async fetchAnnouncement({commit}) {
+      let data = []
+      await fb.database.ref("announcement").on('value', (snap) => {
+        data.push(snap.val())
+      })
+      data.reverse()
+      commit('setAnnouncement', data)
     },
     async logout({ commit }) {
       await fb.auth.signOut()
