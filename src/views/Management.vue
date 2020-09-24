@@ -61,12 +61,27 @@
                         <v-card flat>
                             <v-card-title>Classes</v-card-title>
                             <v-card-subtitle>Lists</v-card-subtitle>
-                            <v-card-text>
-                                <v-list>
-                                    <v-list-item v-for="cls in pClasses" :key="cls.id">
-                                    {{cls.name}} - {{cls.code}} -  {{cls.program}}
-                                    </v-list-item>
-                                </v-list>
+                            <v-card-text>                        
+                                <v-simple-table style="height: 200px; overflow: auto">
+                                    <template v-slot:default>
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Name</th>
+                                                <th class="text-left">Code</th>
+                                                <th class="text-left">Program</th>
+                                                <th class="text-left">CR</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="cls in pClasses" :key="cls.id">
+                                                <td>{{cls.name}}</td>
+                                                <td>{{cls.code}}</td>
+                                                <td>{{cls.program}}</td>
+                                                <td>{{cls.cr}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </template>
+                                </v-simple-table>
                             </v-card-text>
                             <v-card-subtitle>Add new</v-card-subtitle>
                             <v-card class="mx-auto" tile>
@@ -120,11 +135,26 @@
                             <v-card-title>Courses</v-card-title>
                             <v-card-subtitle>Lists</v-card-subtitle>
                             <v-card-text>
-                                <v-list>
-                                   <v-list-item v-for="course in _courses" :key="course.id">
-                                    {{course.title}} - {{course.code}}
-                                    </v-list-item>
-                                </v-list>
+                                <v-simple-table style="height: 200px; overflow: auto">
+                                    <template v-slot:default>
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Name</th>
+                                                <th class="text-left">Code</th>
+                                                <th class="text-left">Sem</th>
+                                                <th class="text-left">Teacher</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="course in _courses" :key="course.id">
+                                                <td>{{course.title}}</td>
+                                                <td>{{course.code}}</td>
+                                                <td>{{course.semstor}}</td>
+                                                <td>{{course.teacher}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </template>
+                                </v-simple-table>
                             </v-card-text>
                             <v-card-subtitle>Add new</v-card-subtitle>
                             <v-card class="mx-auto" tile>
@@ -192,9 +222,28 @@
                             <v-card-title>Resources</v-card-title>
                             <v-card-subtitle>Lists</v-card-subtitle>
                             <v-card-text>
-                                <v-list>
-                                   
-                                </v-list>
+                                <v-simple-table style="height: 200px; overflow: auto">
+                                    <template v-slot:default>
+                                        <thead>
+                                            <tr>
+                                            <th class="text-left">Name</th>
+                                            <th class="text-left">By</th>
+                                            <th class="text-left">Type</th>
+                                            <th class="text-left">Content Type</th>
+                                            <th class="text-left">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="resource in _resources.data" :key="resource.id" >
+                                                <td v-if="resource.delete != 'true' || resource.delete == undefined">{{ resource.name }}</td>
+                                                <td v-if="resource.delete != 'true' || resource.delete == undefined">{{ resource.userName }}</td>
+                                                <td v-if="resource.delete != 'true' || resource.delete == undefined">{{ resource.type }}</td>
+                                                <td v-if="resource.delete != 'true' || resource.delete == undefined">{{ resource.content }}</td>
+                                                <td v-if="resource.delete != 'true' || resource.delete == undefined"> <a @click="deleteResource(resource.id)">Delete</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </template>
+                                </v-simple-table>
                             </v-card-text>
                             <v-card-subtitle>Add new</v-card-subtitle>
                             <v-card class="mx-auto" tile>
@@ -372,11 +421,18 @@ export default {
             this.submit = false
             this.$refs.form.reset()
         },
+        deleteResource(ID) {
+            this.$store.dispatch("deleteResource", ID),
+            this.isMsg = true
+            this.msg = "Deleted successfully"
+
+        },
     },
     mounted() {
         this.$store.dispatch("fetchAnnouncement")
         this.$store.dispatch("getClasses")
         this.$store.dispatch("getAllCourses")
+        this.$store.dispatch("getResources")
     },
     computed: {
         user() {
@@ -393,6 +449,9 @@ export default {
         },
         announcements() {
             return this.$store.getters.announcements
+        },
+        _resources() {
+            return this.$store.getters.resources
         }
     }
 }

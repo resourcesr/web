@@ -191,6 +191,30 @@ export default new Vuex.Store({
         content: form.content,
       })
     },
+    async deleteResource({dispatch}, id) {
+      // create user profile object in userCollections
+      await fb.resourcesCollection.doc(id).update({
+        delete: "true"
+      });
+      dispatch('getResources')
+        
+    },
+    async getResources({commit}) {
+      const subjects = await fb.resourcesCollection.orderBy('created', 'desc').onSnapshot(snapshot => {
+        let resArray = []
+        let types = []
+        snapshot.forEach(doc => {
+          let res = doc.data()
+          res.id = doc.id
+          let type = res.type
+
+          resArray.push(res)
+          types.push(type)
+        })
+        let _types = [...new Set(types)];
+        commit('setResources', {data: resArray, types:_types})
+      })
+    },
     async getResourcesByCourse({commit}, course) {
       const subjects = await fb.resourcesCollection.orderBy('created', 'desc').where("course_id", "==", course).onSnapshot(snapshot => {
         let resArray = []
