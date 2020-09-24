@@ -49,7 +49,8 @@ export default new Vuex.Store({
       await fb.usersCollection.doc(data.user.uid).set({
         name: data.form.name,
         sap: data.form.sap,
-        role: "student"
+        role: "student",
+        userId: data.user.uid,
       });
         // fetch user profile and set in state
       dispatch('fetchUserProfile', data.user)
