@@ -2,7 +2,6 @@
     <v-app class="test">
         <v-card color="grey lighten-4" flat tile>
             <v-toolbar dense>
-                <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>
                     <router-link :to="{ name: 'Home' }">
                         ResourceR
@@ -28,57 +27,44 @@
                     </v-tooltip>
                 </div>
                 <div v-if="userProfile.name">
-                    <v-avatar size="36">
-                        <img
-                            src="https://cdn.vuetifyjs.com/images/john.jpg"
-                            alt="John"
-                        >
-                    </v-avatar>
+                    <v-menu  :rounded="rounded" offset-y>
+                        <template v-slot:activator="{ attrs, on }">
+                            <v-avatar v-bind="attrs"  v-on="on">
+                                <img  src="https://cdn.vuetifyjs.com/images/john.jpg"  alt="John"  > 
+                            </v-avatar>
+                            
+                        </template>
+                        <v-list dense>
+                            <v-list-item link>
+                                <v-list-item-content>
+                                    <router-link :to="{ name: 'Home' }"><v-icon>home</v-icon> Home</router-link>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item link v-if="userProfile.role && userProfile.role=='admin'">
+                                <v-list-item-content>
+                                    <router-link :to="{ name: 'admin' }"><v-icon>home</v-icon> Admistrator</router-link>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item link v-if="!userProfile.name">
+                            <v-list-item-content>
+                                <router-link :to="{ name: 'account' }"><v-icon>home</v-icon> Account</router-link>
+                            </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item link v-if="userProfile.name">
+                            <v-list-item-content>
+                                <router-link :to="{ name: 'forum' }"><v-icon>home</v-icon> Timetale</router-link>
+                            </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item link v-if="userProfile.name">
+                            <v-list-item-content>
+                                <p @click="logout"><v-icon>home</v-icon> Logout</p>
+                            </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                    </v-menu>
                 </div>
             </v-toolbar>
         </v-card>
-        <v-navigation-drawer v-model="drawer" absolute temporary>
-            <v-list-item v-if="userProfile.uid">
-                <v-list-item-content>
-                    <v-list-item-title v-if="userProfile.name">{{userProfile.name}}</v-list-item-title>
-                    </v-list-item-content>
-                    <v-btn  icon  @click.stop="drawer = !drawer" > <v-icon>mdi-chevron-left</v-icon>  </v-btn>
-            </v-list-item>
-            <v-list-item v-else>
-                <v-list-item-content>
-                    <v-list-item-title>Menu</v-list-item-title>
-                </v-list-item-content>
-                <v-btn icon  @click.stop="drawer = !drawer" > <v-icon>mdi-chevron-left</v-icon>  </v-btn>
-            </v-list-item>
-            <v-divider></v-divider>
-            <v-list dense>
-            <v-list-item link>
-                <v-list-item-content>
-                        <router-link :to="{ name: 'Home' }"><v-icon>home</v-icon> Home</router-link>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item link v-if="userProfile.role && userProfile.role=='admin'">
-                    <v-list-item-content>
-                        <router-link :to="{ name: 'admin' }"><v-icon>home</v-icon> Admistrator</router-link>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item link v-if="!userProfile.name">
-                <v-list-item-content>
-                    <router-link :to="{ name: 'account' }"><v-icon>home</v-icon> Account</router-link>
-                </v-list-item-content>
-                </v-list-item>
-                <v-list-item link v-if="userProfile.name">
-                <v-list-item-content>
-                    <router-link :to="{ name: 'forum' }"><v-icon>home</v-icon> Timetale</router-link>
-                </v-list-item-content>
-                </v-list-item>
-                <v-list-item link v-if="userProfile.name">
-                <v-list-item-content>
-                    <p @click="logout"><v-icon>home</v-icon> Logout</p>
-                </v-list-item-content>
-                </v-list-item>
-            </v-list>
-        </v-navigation-drawer>
         <v-app>
             <v-main> 
                 <router-view />
@@ -106,6 +92,12 @@ export default {
     data() {
         return {
             drawer: null,
+      btns: [
+        ['Removed', '0'],
+      ],
+      colors: ['deep-purple accent-4', 'error', 'teal darken-1'],
+      items: [...Array(4)].map((_, i) => `Item ${i}`),
+
         }
     },
     methods: {
