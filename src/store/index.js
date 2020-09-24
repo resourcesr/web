@@ -194,8 +194,8 @@ export default new Vuex.Store({
       // clear userProfile and redirect to /login
       commit('setUserProfile', {})
       localStorage.removeItem("auth")
-      window.location.href = "/"
-      //router.push({name: "account"})
+      //window.location.href = "/"
+      router.push({name: "account"})
     },
   },
   modules: {
