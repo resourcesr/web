@@ -24,23 +24,23 @@
                         </v-list-item>
                         <v-list-item link v-if="userProfile.role && userProfile.role=='admin'">
                             <v-list-item-content>
-                                <router-link :to="{ name: 'admin' }"><v-icon>home</v-icon> Admistrator</router-link>
+                                <router-link :to="{ name: 'admin' }"><v-icon>mdi-account-plus</v-icon> Admistrator</router-link>
                             </v-list-item-content>
                         </v-list-item>
                         <v-list-item link v-if="!userProfile.name">
-                        <v-list-item-content>
-                            <router-link :to="{ name: 'account' }"><v-icon>home</v-icon> Account</router-link>
-                        </v-list-item-content>
+                            <v-list-item-content>
+                                <router-link :to="{ name: 'account' }"><v-icon>mdi-account</v-icon> Account</router-link>
+                            </v-list-item-content>
                         </v-list-item>
                         <v-list-item link v-if="userProfile.name">
-                        <v-list-item-content>
-                            <router-link :to="{ name: 'forum' }"><v-icon>home</v-icon> Timetale</router-link>
-                        </v-list-item-content>
+                            <v-list-item-content>
+                                <router-link :to="{ name: 'profile' }"><v-icon>mdi-account</v-icon> profile</router-link>
+                            </v-list-item-content>
                         </v-list-item>
                         <v-list-item link v-if="userProfile.name">
-                        <v-list-item-content>
-                            <p @click="logout"><v-icon>home</v-icon> Logout</p>
-                        </v-list-item-content>
+                            <v-list-item-content>
+                                <p @click="logout"><v-icon>mdi-logout</v-icon> Logout</p>
+                            </v-list-item-content>
                         </v-list-item>
                     </v-list>
                 </v-navigation-drawer>
