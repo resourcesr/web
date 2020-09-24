@@ -140,7 +140,7 @@ export default {
     },
     mounted() {
         this.userData()
-  },
+    },
     computed: {
         ...mapState(['userProfile']),
         loggedIn() {

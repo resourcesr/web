@@ -69,11 +69,11 @@ const routes = [
         }
     },
     {
-        path: '/complete/profile',
-        name: 'fill',
-        component: () => import('../views/Auth/fill.vue'),
+        path: '/profile',
+        name: 'profile',
+        component: () => import('../views/Auth/Profile.vue'),
         meta: {
-            title: "Complete Profile",
+            title: "Profile",
         }
     },
     {

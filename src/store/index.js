@@ -44,6 +44,16 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    async updateProfile({dispatch}, form) {
+      // create user profile object in userCollections
+      await fb.usersCollection.doc(fb.auth.currentUser.uid).update({
+        name: form.name,
+        sap: form.sap,
+      });
+        // fetch user profile and set in state
+      dispatch('fetchUserProfile', fb.auth.currentUser.uid)
+        
+    },
     async completeProfile({dispatch}, data) {
       // create user profile object in userCollections
       await fb.usersCollection.doc(data.user.uid).set({
