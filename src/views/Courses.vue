@@ -10,7 +10,7 @@
                     <h3 class="title text-center">Semester - 0{{sem}}</h3>
                     <div style="" v-if="courses.data.length">
                         <div v-for="course in courses.data" :key="course.id">
-                            <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-if="sem == course.semstor">
+                            <v-card class="mx-auto custom-card" style="margin: 6px;" max-width="1000" v-if="sem == course.semstor">
                                 <router-link 
                                 :to="{ path: `/res/${department}/${depName}/${CcourseID}/${courseName}/${course.id}/${course.title}`}" >
                                     <div class='res'>
@@ -29,9 +29,9 @@
                                             </v-col>
                                             <v-col key="3">
                                             <p class="res_right">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24" viewBox="0 0 24 24">
-                                                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                                                </svg>
+                                                <v-icon>
+                                                    mdi-arrow-right-thick
+                                                </v-icon>
                                             </p>
                                             </v-col>
                                             <v-responsive  width="100%" ></v-responsive>

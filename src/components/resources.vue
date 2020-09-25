@@ -9,7 +9,7 @@
                 </div>
                 <div style="" v-if="resources.data.length">
                     <div v-for="resource in resources.data" :key="resource.id">
-                        <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-if="type == resource.type && (resource.content == content) && (resource.delete != 'true' || resource.delete == undefined)">
+                        <v-card class="mx-auto custom-card-resource" style="margin: 6px;" max-width="1000" v-if="type == resource.type && (resource.content == content) && (resource.delete != 'true' || resource.delete == undefined)">
                             <div>
                                 <v-container class="">
                                     <v-row no-gutters class="padding: 25px">

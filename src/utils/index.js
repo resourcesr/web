@@ -7,7 +7,7 @@ const timeAgo =  (timestamp) => {
     // we need Unix timestamp so we have to get rid of last three difits.
     let diff = (Date.now()/1000) - (date.getTime()/1000)
     if (diff <= 60)
-        return (diff == 1) ? 'Just now' : `${diff} secs ago`
+        return (diff == 1) ? 'Just now' : `${Math.round(diff)} secs ago`
     else if (diff >= 60 && diff <= 3600)
         return (diff / 60 == 1) ? "mint ago" : `${Math.round(diff / 60)} mins ago`
     else if (diff >= 3600 && diff <= 86400)

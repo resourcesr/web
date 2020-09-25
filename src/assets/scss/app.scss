@@ -82,15 +82,16 @@ select, option {
     display: flex;
     padding-top: 18px;
     padding: 6px;
-
 }
 .resource .center .name {
     font-size: 14px!important;
 }
-.resource .center .nmnamee, .resource .center .cr {
+.resource .center .name, .resource .center .cr {
     font-family: monospace;
     word-break: break-all;
     width: auto;
+    position: relative;
+    padding: 6px;
 }
 .resource .center .cr {
     font-size: 10px!important;
@@ -181,6 +182,12 @@ select, option {
     box-shadow: 0 0px 1px 0 rgba(0,0,0,0.14);
     border-radius: 4px;
 }
+.custom-card {
+    height: 100px;
+}
+.custom-card-resource {
+    height: 130px;
+}
 @media only screen and (max-width: 1580px) {
     .page {
         margin-left: 150px;
@@ -206,5 +213,12 @@ select, option {
     .v-menu__content {
         top: 50px!important;
     }
-
+}
+@media only screen and (max-width: 600px) {
+    .custom-card {
+        height: auto;
+    }
+    .custom-card-resource {
+        height: auto;
+    }
 }

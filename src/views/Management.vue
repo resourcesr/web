@@ -226,11 +226,11 @@
                                     <template v-slot:default>
                                         <thead>
                                             <tr>
-                                            <th class="text-left">Name</th>
-                                            <th class="text-left">By</th>
-                                            <th class="text-left">Type</th>
-                                            <th class="text-left">Content Type</th>
-                                            <th class="text-left">Delete</th>
+                                                <th class="text-left">Name</th>
+                                                <th class="text-left">By</th>
+                                                <th class="text-left">Type</th>
+                                                <th class="text-left">Content Type</th>
+                                                <th class="text-left">Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
