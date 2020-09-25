@@ -2,7 +2,7 @@
     <div>
         <breadcrumb :name_r="Cname"/>
         <dHeader /> 
-        <div class="page">
+        <div :class="userProfile.name ? 'page': ''">
             <div>
                 <h3 class="title text-center">{{courseName}}</h3>
             </div>
@@ -82,6 +82,7 @@
 import breadcrumb from "../components/breadcrumb"
 import dHeader from "../components/dHeader"
 import resources from "../components/resources"
+import { mapState } from 'vuex'
 
 export default {
     name: 'resource',
@@ -111,6 +112,7 @@ export default {
         this.$store.dispatch("getResourcesByCourse", this.cId)
     },
     computed: {
+        ...mapState(['userProfile']),
         course() {
             return this.$store.getters.courses
         },

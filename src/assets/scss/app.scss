@@ -16,6 +16,9 @@
     padding: 0px;
     margin: 0px;
 }
+.v-main__wrap {
+    padding: 25px;
+}
 .v-window-item--active {
     background-color: #e7e8e8;
 }
@@ -159,7 +162,6 @@ select, option {
 }
 .page {
     margin-top: -350px;
-    padding: 25px;
 }
 .mobile-only {
     display: none;

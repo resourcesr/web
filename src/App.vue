@@ -34,13 +34,17 @@
                     </div>
                 </div>
                 <span class="pt-5"></span>
-                <div class="mobile-only pl-5">
+                <div v-if="!userProfile.name">
+                    <span style="border: 1px solid black; padding: 12px">
+                        <router-link :to="{ name: 'account' }"><v-icon>mdi-account</v-icon> Account</router-link>
+                    </span>
+                </div>
+                <div class="mobile-only pl-5" v-if="userProfile.name">
                     <v-menu>
                         <template v-slot:activator="{ attrs, on }">
                             <v-avatar v-bind="attrs"  v-on="on" size="46">
                                 <img  src="/img/icons/user.jpg"  alt="John"  > 
-                            </v-avatar>
-                            
+                            </v-avatar>  
                         </template>
                         <navbar />
                     </v-menu>

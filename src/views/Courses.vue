@@ -2,7 +2,7 @@
     <div>
         <breadcrumb :name_r="depName"/>
         <dHeader /> 
-        <div class="page">
+        <div :class="userProfile.name ? 'page': ''">
             <h3 class="title text-center">{{courseName}}</h3>
             <div v-if='courses.data.length'>
                 <p class="text-center pt-5">Select your subject.</p>
@@ -54,6 +54,7 @@
 import {_colorFromStr} from "../utils/"
 import breadcrumb from "../components/breadcrumb"
 import dHeader from "../components/dHeader"
+import { mapState } from 'vuex'
 
 export default {
     name: 'courses',
@@ -80,6 +81,7 @@ export default {
         this.$store.dispatch("getCourseByProgram", this.CcourseID)
     },
     computed: {
+        ...mapState(['userProfile']),
         courses() {
             return this.$store.getters.courses
         }

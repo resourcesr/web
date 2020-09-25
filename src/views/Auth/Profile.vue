@@ -1,8 +1,9 @@
 <template>
     <div>
+    <breadcrumb :name_r="userProfile.name ? userProfile.name : 'Profile'"/>
     <br>
     <dHeader /> 
-        <div class="page">
+        <div :class="userProfile.name ? 'page': ''">
             <div v-if="!userProfile.name">
                 <v-card class="mx-auto" max-width="600">
                     <v-card-text>
@@ -103,10 +104,12 @@
 import * as firebase from 'firebase/app'
 import { mapState } from 'vuex'
 import router from '../../router/index'
+import breadcrumb from "../../components/breadcrumb"
 import dHeader from "../../components/dHeader"
 
 export default {
     components: {
+        breadcrumb,
         dHeader
     },
     data() {

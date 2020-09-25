@@ -2,7 +2,7 @@
   <div>
         <breadcrumb name_r="Home"/>
         <dHeader /> 
-        <div class="page">
+        <div :class="userProfile.name ? 'page': ''">
             <p class="text-center pt-5">Select your department.</p>
             <v-divider class="pt-5"/>
             <v-card class="mx-auto" style="margin: 6px;" max-width="1000" v-for="(department, index) in departments" :key="index">
@@ -41,6 +41,8 @@
 import {_colorFromStr} from "../utils/"
 import breadcrumb from "../components/breadcrumb"
 import dHeader from "../components/dHeader"
+import { mapState } from 'vuex'
+
 export default {
     name: 'Home',
     components: {
@@ -62,5 +64,8 @@ export default {
             return _colorFromStr(str)
         }
     },
+    computed: {
+        ...mapState(['userProfile'])
+    }
 }
 </script>

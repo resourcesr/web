@@ -66,6 +66,10 @@ const routes = [
         component: () => import('../views/Auth/Account.vue'),
         meta: {
             title: "Account",
+            breadcrumb: [
+                {name: "Home", route: "Home"},
+                {name: "Account"},
+            ],
         }
     },
     {
@@ -74,6 +78,10 @@ const routes = [
         component: () => import('../views/Auth/Profile.vue'),
         meta: {
             title: "Profile",
+            breadcrumb: [
+                {name: "Home", route: "Home"},
+                {name: "Profile", middle: true},
+            ],
         }
     },
     {
@@ -82,6 +90,11 @@ const routes = [
         component: () => import('../views/Auth/reset_password.vue'),
         meta: {
             title: "Reset Password",
+            breadcrumb: [
+                {name: "Home", route: "Home"},
+                {name: "Account", route: "account"},
+                {name: "Reset Password"},
+            ],
         }
     },
     {

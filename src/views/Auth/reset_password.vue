@@ -1,8 +1,9 @@
 <template>
     <div>
+    <breadcrumb name_r=""/>
     <br />
     <dHeader /> 
-        <div class="page">
+        <div :class="userProfile.name ? 'page': ''">
             <v-card class="mx-auto" max-width="600" tile>
                 <v-card-text>
                     <div>
@@ -45,10 +46,13 @@
 <script>
 import { auth } from '../../firebase';
 import router from '../../router/index'
+import breadcrumb from "../../components/breadcrumb"
 import dHeader from "../../components/dHeader"
+import { mapState } from 'vuex'
 
 export default {
     components: {
+        breadcrumb,
         dHeader
     },
     data() {
@@ -76,5 +80,8 @@ export default {
             this.forms.email = ""
         }       
     },
+    computed: {
+        ...mapState(['userProfile'])
+    }
 }
 </script>

@@ -2,7 +2,7 @@
   <div>
     <breadcrumb :name_r="depName"/>
     <dHeader /> 
-    <div class="page">
+    <div :class="userProfile.name ? 'page': ''">
       <div>
           <h3 class="title text-center">Classes - {{depName}}</h3>
       </div>
@@ -47,6 +47,7 @@
 import {_colorFromStr} from "../utils/"
 import breadcrumb from "../components/breadcrumb"
 import dHeader from "../components/dHeader"
+import { mapState } from 'vuex'
 
 export default {
   name: 'classes',
@@ -70,6 +71,7 @@ export default {
     this.$store.dispatch("getClassesByProgram", this.department)
   },
   computed: {
+    ...mapState(['userProfile']),
     pClasses() {
         return this.$store.getters.pClasses
     },

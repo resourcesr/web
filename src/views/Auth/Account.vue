@@ -1,8 +1,9 @@
 <template>
     <div>
+    <breadcrumb name_r=""/>
     <br />
     <dHeader /> 
-        <div class="page">
+        <div :class="userProfile.name ? 'page': ''">
             <v-card class="mx-auto" max-width="600" v-if="showLoginForm" tile>
                 <v-card-text>
                     <div>
@@ -151,10 +152,13 @@
 <script>
 import * as firebase from 'firebase/app'
 import router from '../../router/index'
+import breadcrumb from "../../components/breadcrumb"
 import dHeader from "../../components/dHeader"
+import { mapState } from 'vuex'
 
 export default {
     components: {
+        breadcrumb,
         dHeader
     },
     data() {
@@ -276,6 +280,9 @@ export default {
     mounted() {
         // Do not open the login page if user already logged in.
         this.isLogin();
+    },
+    computed: {
+        ...mapState(['userProfile'])
     }
 }
 </script>
