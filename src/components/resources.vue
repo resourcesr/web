@@ -20,7 +20,7 @@
                                                 </p>
                                                 <div class="center">
                                                     <p class="name text-wrap">{{resource.name}}</p>
-                                                    <p class="cr">Uploaded <strong>{{timeSince(resource.created.seconds) }}  </strong> by
+                                                    <p class="cr">Uploaded <strong>{{resource.created | formatDate }}  </strong> by
                                                     <strong> {{resource.userName}} </strong></p>
                                                 </div>
                                             </div>
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import {timeAgo} from "../utils"
 export default {
     name: "resources",
     props: {
@@ -55,26 +56,12 @@ export default {
         icons: Object,
     },
     methods: {
-        timeSince(timeStamp) {
-            let now = new Date()
-            let secondsPast = (now.getTime() - timeStamp) / 1000;
-            if (secondsPast < 60) {
-                return parseInt(secondsPast) + 's';
-            }
-            if (secondsPast < 3600) {
-                return parseInt(secondsPast / 60) + 'm';
-            }
-            if (secondsPast <= 86400) {
-                return parseInt(secondsPast / 3600) + 'h';
-            }
-            if (secondsPast > 86400) {
-                let timeStampObj = new Date(timeStamp * 1000); 
-                let day = timeStampObj.getDate();
-                let month = timeStampObj.toDateString().match(/ [a-zA-Z]*/)[0].replace(" ", "");
-                let year = timeStampObj.getFullYear() == now.getFullYear() ? "" : " " + timeStampObj.getFullYear();
-                return day + " " + month + year;
-            }
-        }
     },
+    filters: {
+        formatDate(val) {
+            if (!val) { return '-' }
+            return timeAgo(val)
+        }
+    }
 }
 </script>
