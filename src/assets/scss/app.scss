@@ -79,11 +79,18 @@ select, option {
     display: flex;
     padding-top: 18px;
     padding: 6px;
+
 }
-.resource .center .name, .resource .center .cr {
+.resource .center .name {
+    font-size: 14px!important;
+}
+.resource .center .nmnamee, .resource .center .cr {
     font-family: monospace;
     word-break: break-all;
     width: auto;
+}
+.resource .center .cr {
+    font-size: 10px!important;
 }
 .resource .center strong {
     font-weight: 600;
@@ -152,6 +159,7 @@ select, option {
 }
 .page {
     margin-top: -350px;
+    padding: 25px;
 }
 .mobile-only {
     display: none;
