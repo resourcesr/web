@@ -1,9 +1,6 @@
 
 # ResourceR Web App
-
-Web app for Riphah class resources
-
- 
+Web app for Riphah class resources 
 
 ## Features
 
@@ -12,6 +9,7 @@ Web app for Riphah class resources
 3.  [x] Role Base user account
 4.  [x] Admin dashboard
 5.  [x] Resources
+
 	4. [x] Departments
 	5. [x] Classes
 	6. [x] Courses
@@ -26,6 +24,7 @@ Web app for Riphah class resources
 9. [ ] Teacher Profile
 10. [ ] Timetables
 11. [ ] Notifications
+
 	11. [ ] Class  
 	12. [ ] Announcements
 
