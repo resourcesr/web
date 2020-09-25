@@ -56,7 +56,7 @@
                 <router-view />
             </v-main>
             <div>
-            <v-button class="scroll" v-if="top" @click="scrollTop"><v-icon>keyboard_arrow_up</v-icon></v-button>
+            <span class="scroll" v-if="top" @click="scrollTop"><v-icon>keyboard_arrow_up</v-icon></span>
             </div>
         </v-app>
     </v-app>

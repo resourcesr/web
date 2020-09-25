@@ -3,6 +3,7 @@
     <breadcrumb :name_r="depName"/>
     <dHeader /> 
     <div :class="userProfile.name ? 'page': ''">
+      <spinner v-if="loading == true" />
       <div>
           <h3 class="title text-center">Classes - {{depName}}</h3>
       </div>
@@ -47,13 +48,15 @@
 import {_colorFromStr} from "../utils/"
 import breadcrumb from "../components/breadcrumb"
 import dHeader from "../components/dHeader"
+import spinner from "../components/spinner"
 import { mapState } from 'vuex'
 
 export default {
   name: 'classes',
   components: {
     breadcrumb,
-    dHeader
+    dHeader,
+    spinner
   },
   data() {
     const {department: department, dname: depName} = this.$route.params;
@@ -71,10 +74,7 @@ export default {
     this.$store.dispatch("getClassesByProgram", this.department)
   },
   computed: {
-    ...mapState(['userProfile']),
-    pClasses() {
-        return this.$store.getters.pClasses
-    },
+    ...mapState(['userProfile', 'pClasses', 'loading'])
   }
 }
 </script>

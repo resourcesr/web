@@ -85,6 +85,11 @@ const routes = [
         }
     },
     {
+        path: '/timetable',
+        name: 'timetable',
+        component: () => import('../views/About.vue')
+    },
+    {
         path: '/reset',
         name: 'reset',
         component: () => import('../views/Auth/reset_password.vue'),

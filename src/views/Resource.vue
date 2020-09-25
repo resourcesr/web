@@ -3,6 +3,7 @@
         <breadcrumb :name_r="Cname"/>
         <dHeader /> 
         <div :class="userProfile.name ? 'page': ''">
+            <spinner v-if="loading == true" />
             <div>
                 <h3 class="title text-center">{{courseName}}</h3>
             </div>
@@ -82,6 +83,7 @@
 import breadcrumb from "../components/breadcrumb"
 import dHeader from "../components/dHeader"
 import resources from "../components/resources"
+import spinner from "../components/spinner"
 import { mapState } from 'vuex'
 
 export default {
@@ -89,7 +91,8 @@ export default {
     components: {
         breadcrumb,
         dHeader,
-        resources
+        resources,
+        spinner
     },
     data() {
         const {name: Cname, sub: cId, subName: courseName} = this.$route.params;
@@ -119,13 +122,10 @@ export default {
         this.$store.dispatch("getResourcesByCourse", this.cId)
     },
     computed: {
-        ...mapState(['userProfile']),
+        ...mapState(['userProfile', 'loading', 'resources']),
         course() {
             return this.$store.getters.courses
-        },
-        resources() {
-            return this.$store.getters.resources
-        },
+        }       
     }
 }
 </script>

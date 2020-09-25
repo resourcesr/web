@@ -11,7 +11,8 @@ export default new Vuex.Store({
     pClasses: {},
     courses: {},
     resources: {},
-    announcements: {}
+    announcements: {},
+    loading: true,
   },
   mutations: {
     setUserProfile(state, val) {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     setAnnouncement(state, val) {
       state.announcements = val
+    },
+    setLoading(state, val) {
+      state.loading = val
     }
   },
   getters: {
@@ -48,7 +52,7 @@ export default new Vuex.Store({
     },
     announcements: (state) => {
       return state.announcements
-    }
+    },
   },
   actions: {
     async updateProfile({dispatch}, form) {
@@ -105,6 +109,7 @@ export default new Vuex.Store({
       })
     },
     async getClassesByProgram({commit}, program) {
+      commit('setLoading', true)
       const subjects = await fb.classesCollection.orderBy('created', 'desc').where("program", "==", program).onSnapshot(snapshot => {
         let clsArray = []
       
@@ -115,6 +120,7 @@ export default new Vuex.Store({
           clsArray.push(cls)
         })
         commit('setClasses', clsArray)
+        commit('setLoading', false)
       })
     },
     async addCourses({commit}, form) {
@@ -143,6 +149,7 @@ export default new Vuex.Store({
       })
     },
     async getCourseByProgram({commit}, cls) {
+      commit('setLoading', true)
       const subjects = await fb.coursesCollection.orderBy('created', 'desc').where("class_id", "==", cls).onSnapshot(snapshot => {
         let clsArray = []
         let sems = []
@@ -156,6 +163,7 @@ export default new Vuex.Store({
         })
         let _sems = [...new Set(sems)];
         commit('setCourses', {data: clsArray, sems:_sems})
+        commit('setLoading', false)
       })
     },
     async getCourseById({commit}, id) {
@@ -216,6 +224,7 @@ export default new Vuex.Store({
       })
     },
     async getResourcesByCourse({commit}, course) {
+      commit('setLoading', true)
       const subjects = await fb.resourcesCollection.orderBy('created', 'desc').where("course_id", "==", course).onSnapshot(snapshot => {
         let resArray = []
         let types = []
@@ -229,6 +238,7 @@ export default new Vuex.Store({
         })
         let _types = [...new Set(types)];
         commit('setResources', {data: resArray, types:_types})
+        commit('setLoading', false)
       })
     },
     async addAnnouncement({dispatch}, form) {
