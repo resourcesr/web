@@ -55,6 +55,9 @@
             <v-main> 
                 <router-view />
             </v-main>
+            <div>
+            <v-button class="scroll" v-if="top" @click="scrollTop"><v-icon>keyboard_arrow_up</v-icon></v-button>
+            </div>
         </v-app>
     </v-app>
 </template>
@@ -80,10 +83,24 @@ export default {
     },
     data() {
         return {
-            drawer: null,
+            top: false
         }
     },
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+    },
     methods: {
+        scrollTop() {
+            window.scrollTo(0, 0);
+        },
+        handleScroll(event)
+        {
+            if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+                this.top = true
+            } else {
+                this.top = false
+            }
+        },
         userData() {
             if (localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined) {
                 this.$store.dispatch("fetchUserProfile", {uid: localStorage.getItem("auth")})

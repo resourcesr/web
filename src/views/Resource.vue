@@ -107,7 +107,14 @@ export default {
             }
         }
     },
+    methods: {
+        scrollTop() {
+            window.scrollTo(0, 0);
+        },
+    },
     mounted() {
+        // we need to scroll top because, if not? the page loads where we click to subject
+        this.scrollTop()
         this.$store.dispatch("getCourseById", this.cId)
         this.$store.dispatch("getResourcesByCourse", this.cId)
     },

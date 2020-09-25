@@ -28,3 +28,7 @@ select, option {
 .breadcrumb > li {
     color: #000;
 }
+.scroll {
+    color: #000;
+    background-color: #fff;
+}
