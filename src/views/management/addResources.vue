@@ -179,6 +179,7 @@ export default {
         },
     },
     mounted() {
+        this.$store.dispatch("courses/getAllCourses")
         this.$store.dispatch("resources/getResources")
     },
     computed: {
