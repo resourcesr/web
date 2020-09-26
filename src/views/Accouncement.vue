@@ -42,7 +42,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(["announcements"])
+        ...mapState('announcements', ["announcements"])
     }
 }
 </script>

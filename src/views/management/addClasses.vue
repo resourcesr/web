@@ -101,7 +101,7 @@ export default {
         addClasses() {
             this.submit = true
             if (this.valid) {
-                this.$store.dispatch("addClasses", this.classes.forms)
+                this.$store.dispatch("classes/addClasses", this.classes.forms)
             }
             this.isMsg = true
             this.msg = "Added successfully"
@@ -111,11 +111,11 @@ export default {
 
     },
     mounted() {
-        this.$store.dispatch("getClasses")
+        this.$store.dispatch("classes/getClasses")
     },
     computed: {
         pClasses() {
-            return this.$store.getters.pClasses
+            return this.$store.getters['classes/pClasses']
         },
     }
 }

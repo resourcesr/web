@@ -61,7 +61,7 @@ export default {
     },
     computed: {
         user() {
-            return this.$store.getters.getCurrentUser
+            return this.$store.getters['user/getCurrentUser']
         }
     }
 }

@@ -48,6 +48,10 @@ export default {
         submit: false,
         isMsg: false,
         msg: "",
+        nameRules: [
+            v => !!v || 'Name is required',
+            v => (v && v.length <= 1000) || 'Name must be less than 100 characters',
+        ],
         announcement: {
             forms: {
                 title: "",
@@ -67,11 +71,11 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch("fetchAnnouncement")
+        this.$store.dispatch("announcements/fetchAnnouncement")
     },
     computed: {
         announcements() {
-            return this.$store.getters.announcements
+            return this.$store.getters['announcements/announcements']
         }
     }
 }

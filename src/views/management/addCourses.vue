@@ -102,6 +102,9 @@ export default {
             v => !!v || 'Name is required',
             v => (v && v.length <= 1000) || 'Name must be less than 100 characters',
         ],
+        semstors: [
+            1, 2, 3, 4, 5, 6, 7, 8
+        ],
         courses: {
             forms: {
                 class_id: "",
@@ -119,7 +122,7 @@ export default {
         addCourse() {
             this.submit = true
             if (this.valid) {
-                this.$store.dispatch("addCourses", this.courses.forms)
+                this.$store.dispatch("courses/addCourses", this.courses.forms)
             }
             this.isMsg = true
             this.msg = "Added successfully"
@@ -128,15 +131,15 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch("getClasses")
-        this.$store.dispatch("getAllCourses")
+        this.$store.dispatch("classes/getClasses")
+        this.$store.dispatch("courses/getAllCourses")
     },
     computed: {
         pClasses() {
-            return this.$store.getters.pClasses
+            return this.$store.getters['classes/pClasses']
         },
         _courses() {
-            return this.$store.getters.courses
+            return this.$store.getters['courses/courses']
         }
     }
 }

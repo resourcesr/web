@@ -17,6 +17,16 @@ const routes = [
         },
     },
     {
+        path: '/teacher',
+        name: 'teacher',
+        component: () => import('../views/Teacher.vue'),
+        meta: {
+            breadcrumb: [
+                {name: "Home"}
+            ],
+        },
+    },
+    {
         path: '/classes/:department/:dname',
         name: 'classes:index',
         component: () => import('../views/Classes.vue'),

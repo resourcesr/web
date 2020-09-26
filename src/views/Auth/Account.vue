@@ -216,7 +216,7 @@ export default {
             this.submit = true
             const provider = new firebase.auth.GoogleAuthProvider();
             await firebase.auth().signInWithPopup(provider).then(resp => {
-                this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
+                this.$store.dispatch("user/fetchUserProfile", firebase.auth().currentUser)
                 this.$router.push({name: "fill"})
             }).catch(err => {
                 this.isMsg = true
@@ -239,7 +239,7 @@ export default {
                         localStorage.setItem('auth', firebase.auth().currentUser.uid)
                         this.isMsg = true
                         this.msg = "Logged in successfully"
-                        this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
+                        this.$store.dispatch("user/fetchUserProfile", firebase.auth().currentUser)
                         router.push("/")
                     },
                     (err) => {
@@ -259,7 +259,7 @@ export default {
                     (user) => {
                         this.isMsg = true
                         // create user profile object in userCollections
-                        this.$store.dispatch("completeProfile", {user: firebase.auth().currentUser, form: this.forms.signup})
+                        this.$store.dispatch("user/completeProfile", {user: firebase.auth().currentUser, form: this.forms.signup})
                         this.msg = "Account created successfully"
                         this.$store.dispatch("fetchUserProfile", firebase.auth().currentUser)
                     },
@@ -282,7 +282,7 @@ export default {
         this.isLogin();
     },
     computed: {
-        ...mapState(['userProfile'])
+        ...mapState('user', ['userProfile'])
     }
 }
 </script>

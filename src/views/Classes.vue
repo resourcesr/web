@@ -71,10 +71,11 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getClassesByProgram", this.department)
+    this.$store.dispatch("classes/getClassesByProgram", this.department)
   },
   computed: {
-    ...mapState(['userProfile', 'pClasses', 'loading'])
+    ...mapState('user', ['userProfile', 'pClasses', 'loading']),
+    ...mapState('classes', ['pClasses', 'loading'])
   }
 }
 </script>

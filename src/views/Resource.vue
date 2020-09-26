@@ -118,13 +118,14 @@ export default {
     mounted() {
         // we need to scroll top because, if not? the page loads where we click to subject
         this.scrollTop()
-        this.$store.dispatch("getCourseById", this.cId)
-        this.$store.dispatch("getResourcesByCourse", this.cId)
+        this.$store.dispatch("courses/getCourseById", this.cId)
+        this.$store.dispatch("resources/getResourcesByCourse", this.cId)
     },
     computed: {
-        ...mapState(['userProfile', 'loading', 'resources']),
+        ...mapState('user', ['userProfile']),
+        ...mapState('resources', ['loading', 'resources']),
         course() {
-            return this.$store.getters.courses
+            return this.$store.getters['courses/courses']
         }       
     }
 }

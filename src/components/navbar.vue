@@ -28,7 +28,7 @@
             </v-list-item>
             <v-list-item link v-if="userProfile.name">
                 <v-list-item-content>
-                    <router-link :to="{ name: 'profile' }"><v-icon>mdi-account</v-icon> profile</router-link>
+                    <router-link :to="{ name: 'profile' }"><v-icon>mdi-account</v-icon> Profile</router-link>
                 </v-list-item-content>
             </v-list-item>
             <v-list-item link v-if="userProfile.name">
@@ -55,7 +55,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(['userProfile'])
+        ...mapState('user', ['userProfile'])
     }
 }
 </script>

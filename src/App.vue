@@ -27,9 +27,7 @@
                     <span class="pt-5"></span>
                     <div class="pl-5">
                         <router-link :to="{ name: 'accouncement' }">
-                            <v-badge left top color="green"  :content="announcements" >       
-                                <v-icon  class="mr-1">mdi-bell-ring</v-icon>
-                            </v-badge>
+                            <v-icon  class="mr-1">mdi-bell-ring</v-icon>
                         </router-link>
                     </div>
                 </div>
@@ -103,7 +101,7 @@ export default {
         },
         userData() {
             if (localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined) {
-                this.$store.dispatch("fetchUserProfile", {uid: localStorage.getItem("auth")})
+                this.$store.dispatch("user/fetchUserProfile", {uid: localStorage.getItem("auth")})
             }
         },
         logout() {
@@ -135,20 +133,13 @@ export default {
     },
     mounted() {
         this.userData(),
-        this.$store.dispatch("fetchAnnouncement")
+        this.$store.dispatch("announcements/fetchAnnouncement")
     },
     computed: {
-        ...mapState(['userProfile']),
+        ...mapState('user', ['userProfile']),
         loggedIn() {
             return localStorage.getItem("auth") != null || localStorage.getItem("auth") != undefined
-        },
-        announcements() {
-            let announcements = this.$store.getters.announcements
-            if (Object.keys(announcements).length) 
-                return Object.keys(announcements).length
-            else
-                return 0
-        },
+        }
     }
 }
 </script>

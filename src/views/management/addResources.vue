@@ -121,9 +121,6 @@ export default {
         contents: [
             'resource', 'assignment', 'quiz', 'lab',
         ],
-        semstors: [
-            1, 2, 3, 4, 5, 6, 7, 8
-        ],
         nameRules: [
             v => !!v || 'Name is required',
             v => (v && v.length <= 1000) || 'Name must be less than 100 characters',
@@ -167,7 +164,7 @@ export default {
         addResource() {
             this.submit = true
             if (this.valid) {
-                this.$store.dispatch("addResources", this.resources.forms)
+                this.$store.dispatch("resources/addResources", this.resources.forms)
             }
             this.isMsg = true
             this.msg = "Added successfully"
@@ -175,21 +172,21 @@ export default {
             this.$refs.form.reset()
         },
         deleteResource(ID) {
-            this.$store.dispatch("deleteResource", ID),
+            this.$store.dispatch("resources/deleteResource", ID),
             this.isMsg = true
             this.msg = "Deleted successfully"
 
         },
     },
     mounted() {
-        this.$store.dispatch("getResources")
+        this.$store.dispatch("resources/getResources")
     },
     computed: {
         _courses() {
-            return this.$store.getters.courses
+            return this.$store.getters['courses/courses']
         },
         _resources() {
-            return this.$store.getters.resources
+            return this.$store.getters['resources/resources']
         }
     }
 }

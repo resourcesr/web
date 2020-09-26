@@ -42,11 +42,12 @@ export default {
     },
 
     mounted() {
-        this.$store.dispatch("getCourseById", this.CcourseID)
-        this.$store.dispatch("getCourseByProgram", this.CcourseID)
+        this.$store.dispatch("courses/getCourseById", this.CcourseID)
+        this.$store.dispatch("courses/getCourseByProgram", this.CcourseID)
     },
     computed: {
-        ...mapState(['userProfile', 'courses', 'loading'])
+        ...mapState('user', ['userProfile']),
+        ...mapState('courses', ['courses', 'loading'])
     }
 }
 </script>

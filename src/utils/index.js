@@ -4,7 +4,7 @@ const _colorFromStr = (str) => {
 
 const timeAgo =  (timestamp) => {
     let date = timestamp.toDate()
-    // we need Unix timestamp so we have to get rid of last three difits.
+    // we need Unix timestamp so we have to get rid of last three digits.
     let diff = (Date.now()/1000) - (date.getTime()/1000)
     if (diff <= 60)
         return (diff == 1) ? 'Just now' : `${Math.round(diff)} secs ago`

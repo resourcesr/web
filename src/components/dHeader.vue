@@ -19,7 +19,7 @@ export default {
         navbar,
     },
     computed: {
-        ...mapState(['userProfile'])
+        ...mapState('user', ['userProfile'])
     }
 }
 </script>

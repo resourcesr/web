@@ -150,7 +150,7 @@ export default {
             this.validate();
             if (this.valid) {
                 this.submit = true
-                this.$store.dispatch("completeProfile", {user: firebase.auth().currentUser, form: this.forms})
+                this.$store.dispatch("user/completeProfile", {user: firebase.auth().currentUser, form: this.forms})
                 this.msg = "Account created successfully"
                 router.push('/')
             }
@@ -159,14 +159,14 @@ export default {
             this.validate();
             if (this.valid) {
                 this.submit = true
-                this.$store.dispatch("updateProfile", this.forms)
+                this.$store.dispatch("user/updateProfile", this.forms)
                 this.msg = "Account created successfully"
                 router.push('/')
             }
         }
     },
     computed: {
-        ...mapState(['userProfile'])
+        ...mapState('user', ['userProfile'])
     }
 }
 </script>
