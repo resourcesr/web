@@ -127,16 +127,16 @@ export default {
         ],
         resources: {
             forms: {
-                course_id: "",
-                name: "",
-                icon: "",
-                openUrl: "",
-                downloadUrl: "",
-                type: "",
-                content: "",
-                ext: "",
-                mimeType: "",
-                size: "",
+                course_id: null,
+                name: null,
+                icon: null,
+                openUrl: null,
+                downloadUrl: null,
+                type: null,
+                content: null,
+                ext: null,
+                mimeType: null,
+                size: null,
             },
         },
       }
@@ -160,11 +160,23 @@ export default {
                     this.msg = err
                 })
         },
-        
+        prepareData() {
+            return  {
+                course_id: this.resources.forms.course_id,
+                name: this.resources.forms.name,
+                icon: this.resources.forms.icon,
+                openUrl: this.resources.forms.openUrl,
+                downloadUrl: this.resources.forms.downloadUrl,
+                type: this.resources.forms.type,
+                content: this.resources.forms.content,
+                size: this.resources.forms.size ? this.resources.forms.size : "" ,
+                mineType: this.resources.forms.mineType ? this.resources.forms.mineType : "" ,
+            }
+        },
         addResource() {
             this.submit = true
             if (this.valid) {
-                this.$store.dispatch("resources/addResources", this.resources.forms)
+                this.$store.dispatch("resources/addResources", this.prepareData())
             }
             this.isMsg = true
             this.msg = "Added successfully"

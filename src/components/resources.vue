@@ -27,7 +27,7 @@
                                         </v-col>
                                         <v-col key="2" sm="2" xs="2" md="2" lg="2" xl="2">
                                             <p class="res_right">
-                                                <a :href="resource.downloadUrl" target="_blank" ><v-icon>mdi-link-variant</v-icon></a>
+                                                <a :href="resource.openUrl" target="_blank" ><v-icon>mdi-link-variant</v-icon></a>
                                                 <a :href="resource.downloadUrl" target="_blank" ><v-icon>mdi-file-download</v-icon></a>
                                             </p>
                                         </v-col>

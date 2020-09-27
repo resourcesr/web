@@ -33,6 +33,8 @@ export default {
                 downloadUrl: form.downloadUrl,
                 type: form.type,
                 content: form.content,
+                size: form.size,
+                mineType: form.mineType
             })
       },
       async deleteResource({dispatch}, id) {
