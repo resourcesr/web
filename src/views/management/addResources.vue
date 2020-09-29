@@ -97,6 +97,8 @@
 
 <script>
 
+import firebaseConfig from "../../firebaseConfig"
+
 export default {
     name: 'addResources',
     data () {
@@ -146,8 +148,7 @@ export default {
             let info
             this.fetch = true
             let id = this.resources.forms.openUrl.split("/d/")[1].replace("/view?usp=sharing", "")
-            let key = "AIzaSyDPtscuAqioxWMkZqpMQW-5LPubtpI6aW4"
-                await fetch(`https://www.googleapis.com/drive/v2/files/${id}?key=${key}`).then(resp => resp.json()).then(resp => {
+                await fetch(`https://www.googleapis.com/drive/v2/files/${id}?key=${firebaseConfig.apiKey}`).then(resp => resp.json()).then(resp => {
                     this.resources.forms.name = resp.title.split('.')[0]
                     this.resources.forms.downloadUrl = resp.webContentLink
                     this.resources.forms.icon = resp.fileExtension
