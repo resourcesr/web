@@ -53,8 +53,23 @@
             <v-main> 
                 <router-view />
             </v-main>
+
             <div>
             <span class="scroll" v-if="top" @click="scrollTop"><v-icon>keyboard_arrow_up</v-icon></span>
+            </div>
+            <div style="margin-top: 40px">
+                <v-divider />
+                <v-footer
+                    absolute
+                    class="font-weight-medium"
+                    >
+                    <v-col
+                        class="text-center"
+                        cols="12"
+                    >
+                        {{ new Date().getFullYear() }} - <strong>Made with <v-icon style='color: red'>mdi-heart</v-icon> By <a href="https://muhammadumerfarooq.me" target="_blank">Umer</a></strong>
+                    </v-col>
+                </v-footer>
             </div>
         </v-app>
     </v-app>

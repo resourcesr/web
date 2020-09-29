@@ -146,7 +146,7 @@ export default {
             let info
             this.fetch = true
             let id = this.resources.forms.openUrl.split("/d/")[1].replace("/view?usp=sharing", "")
-            let key = ""
+            let key = "AIzaSyDPtscuAqioxWMkZqpMQW-5LPubtpI6aW4"
                 await fetch(`https://www.googleapis.com/drive/v2/files/${id}?key=${key}`).then(resp => resp.json()).then(resp => {
                     this.resources.forms.name = resp.title.split('.')[0]
                     this.resources.forms.downloadUrl = resp.webContentLink
