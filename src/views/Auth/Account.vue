@@ -51,10 +51,9 @@
                                 <div>
                                     <v-btn
                                         :disabled="submit"
-                                        color="success"
-                                        class=""
+                                        class="white"
                                         @click="loginWithGoogle"
-                                        style="width:100%"
+                                        style="width:100%; backgound-color: #fff"
 
                                         ><v-icon>mdi-google</v-icon> 
                                         Login With Google

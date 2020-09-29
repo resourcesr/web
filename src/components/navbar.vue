@@ -51,7 +51,7 @@ export default {
     name: "navbar",
     methods: {
         logout() {
-            this.$store.dispatch("logout")
+            this.$store.dispatch("user/logout")
         },
     },
     computed: {
