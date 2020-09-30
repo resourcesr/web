@@ -49,15 +49,7 @@
                                     <p class="text-center">OR</p>
                                 </div>
                                 <div>
-                                    <v-btn
-                                        :disabled="submit"
-                                        class="white"
-                                        @click="loginWithGoogle"
-                                        style="width:100%; backgound-color: #fff"
-
-                                        ><v-icon>mdi-google</v-icon> 
-                                        Login With Google
-                                    </v-btn>
+                                    <a @click="loginWithGoogle"><gbtn /></a>
                                 </div>
                             </v-card-actions>
                         </v-form>
@@ -125,16 +117,7 @@
                                     <p class="text-center">OR</p>
                                 </div>
                                 <div>
-                                    <v-btn
-                                        :disabled="submit"
-                                        color="success"
-                                        class=""
-                                        @click="loginWithGoogle"
-                                        style="width:100%"
-
-                                        ><v-icon>mdi-google</v-icon> 
-                                        Join With Google
-                                    </v-btn>
+                                    <a @click="loginWithGoogle"><gbtn /></a>
                                 </div>
                             </v-card-actions>
                         </v-form>
@@ -153,12 +136,15 @@ import * as firebase from 'firebase/app'
 import router from '../../router/index'
 import breadcrumb from "../../components/breadcrumb"
 import dHeader from "../../components/dHeader"
+import gbtn from "../../components/gbtn"
+
 import { mapState } from 'vuex'
 
 export default {
     components: {
         breadcrumb,
-        dHeader
+        dHeader,
+        gbtn,
     },
     data() {
         return {
