@@ -21,7 +21,7 @@
                                 <td>{{course.code}}</td>
                                 <td>{{course.semstor}}</td>
                                 <td>{{course.teacher}}</td>
-                                <td><a @click="addEvent(course.id, course.title)">Add</a></td>
+                                <td><a @click="addEvent(course.id, course.title, course.class_id)">Add</a></td>
                             </tr>
                         </tbody>
                     </template>
@@ -145,6 +145,7 @@
                     <v-select
                     :items="days"
                     label="Select day"
+                    v-model="event.forms.day"
                     ></v-select>
                     <v-row
                     justify="space-around"
@@ -192,6 +193,7 @@ export default {
         course_id: "",
         title: "",
         dialog: false,
+        klass_id: "",
         days: [
             'Sunday',
             'Monday',
@@ -229,9 +231,10 @@ export default {
       }
     },
     methods: {
-        addEvent(id, title) {
+        addEvent(id, title, klass_id) {
             this.title = title
             this.course_id = id
+            this.klass_id = klass_id
             this.dialog = true
             this.$store.dispatch("event/getEventByCourse", id)
         },
@@ -243,12 +246,13 @@ export default {
                 start: this.event.forms.start,
                 end: this.event.forms.end,
                 room: this.event.forms.room,
+                klass_id: this.klass_id
             }
         },
         addEventDispatch() {
             this.submit = true
             if (this.valid) {
-                this.$store.dispatch("event/addEvents", this.eventDataPrepare())
+                this.$store.dispatch("event/addEvent", this.eventDataPrepare())
             }
             this.isMsg = true
             this.msg = "Added successfully"

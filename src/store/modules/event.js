@@ -31,6 +31,7 @@ export default {
             start: form.start,
             end: form.end,
             room: form.room,
+            klass_id: form.klass_id,
             type: "class",
           })
         },
