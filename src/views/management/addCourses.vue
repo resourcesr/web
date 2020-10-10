@@ -12,6 +12,7 @@
                                 <th class="text-left">Code</th>
                                 <th class="text-left">Sem</th>
                                 <th class="text-left">Teacher</th>
+                                <th class="text-left">Add Event</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -20,6 +21,7 @@
                                 <td>{{course.code}}</td>
                                 <td>{{course.semstor}}</td>
                                 <td>{{course.teacher}}</td>
+                                <td><a @click="addEvent(course.id, course.title)">Add</a></td>
                             </tr>
                         </tbody>
                     </template>
@@ -85,6 +87,95 @@
                 </v-card-text>
             </v-card>
         </v-card>
+
+        <div class="text-center">
+            <v-dialog
+            v-model="dialog"
+            fullscreen
+            hide-overlay
+            >
+            <v-toolbar color="primary">
+            <v-btn
+            icon
+            dark
+            @click="dialog = false"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+                <v-toolbar-title>Event</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items>
+                    <v-btn
+                    dark
+                    text
+                    @click="addEventDispatch()"
+                    >
+                    Save
+                    </v-btn>
+                </v-toolbar-items>
+            </v-toolbar>
+            <v-card>
+                <v-simple-table style="height: 200px; overflow: auto">
+                    <template v-slot:default>
+                        <thead>
+                            <tr>
+                                <th class="text-left">Title</th>
+                                <th class="text-left">Day</th>
+                                <th class="text-left">Start</th>
+                                <th class="text-left">End</th>
+                                <th class="text-left">Room</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="event in events" :key="event.id">
+                                <td>{{event.course_title}}</td>
+                                <td>{{event.day}}</td>
+                                <td>{{event.start}}</td>
+                                <td>{{event.end}}</td>
+                                <td>{{event.room}}</td>
+                            </tr>
+                        </tbody>
+                    </template>
+                </v-simple-table>
+                <v-card-title class="headline grey lighten-2">
+                Add event {{title}}
+                </v-card-title>
+
+                <v-card-text>
+                    <v-select
+                    :items="days"
+                    label="Select day"
+                    ></v-select>
+                    <v-row
+                    justify="space-around"
+                    align="center"
+                    >
+                    <v-col style="width: 350px; flex: 0 1 auto;">
+                        <h2>Start:</h2>
+                        <v-time-picker
+                        v-model="event.forms.start"
+                        ></v-time-picker>
+                    </v-col>
+                    <v-col style="width: 350px; flex: 0 1 auto;">
+                        <h2>End:</h2>
+                        <v-time-picker
+                        v-model="event.forms.end"
+                        ></v-time-picker>
+                    </v-col>
+                    </v-row>
+                    <v-text-field
+                        v-model="event.forms.room"
+                        :rules="nameRules"
+                        label="Room"
+                        required
+                    >
+                    </v-text-field>
+                </v-card-text>
+
+            </v-card>
+            </v-dialog>
+        </div>
+
     </div>
 </template>
 
@@ -98,6 +189,17 @@ export default {
         submit: false,
         isMsg: false,
         msg: "",
+        course_id: "",
+        title: "",
+        dialog: false,
+        days: [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Friday',
+            'Saturday',
+        ],
         nameRules: [
             v => !!v || 'Name is required',
             v => (v && v.length <= 1000) || 'Name must be less than 100 characters',
@@ -105,6 +207,14 @@ export default {
         semstors: [
             1, 2, 3, 4, 5, 6, 7, 8
         ],
+        event: {
+            forms: {
+                day: null,
+                start: null,
+                end: null,
+                room: null,
+            }
+        },
         courses: {
             forms: {
                 class_id: "",
@@ -119,6 +229,32 @@ export default {
       }
     },
     methods: {
+        addEvent(id, title) {
+            this.title = title
+            this.course_id = id
+            this.dialog = true
+            this.$store.dispatch("event/getEventByCourse", id)
+        },
+        eventDataPrepare() {
+            return {
+                course_id: this.course_id,
+                course_title: this.title,
+                day: this.event.forms.day,
+                start: this.event.forms.start,
+                end: this.event.forms.end,
+                room: this.event.forms.room,
+            }
+        },
+        addEventDispatch() {
+            this.submit = true
+            if (this.valid) {
+                this.$store.dispatch("event/addEvents", this.eventDataPrepare())
+            }
+            this.isMsg = true
+            this.msg = "Added successfully"
+            this.submit = false
+            this.$refs.form.reset()
+        },
         addCourse() {
             this.submit = true
             if (this.valid) {
@@ -140,6 +276,9 @@ export default {
         },
         _courses() {
             return this.$store.getters['courses/courses']
+        },
+        events() {
+            return this.$store.getters['event/events']
         }
     }
 }

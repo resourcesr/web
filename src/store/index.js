@@ -7,6 +7,7 @@ import classes from './modules/classes'
 import courses from './modules/courses'
 import resources from './modules/resources'
 import announcements from './modules/announcements'
+import event from './modules/event'
 
 export default new Vuex.Store({
     modules: {
@@ -15,5 +16,6 @@ export default new Vuex.Store({
         courses,
         resources,
         announcements,
+        event,
     }
 })

@@ -16,6 +16,7 @@ const usersCollection = db.collection('users')
 const subjectsCollection = db.collection('subjects')
 const classesCollection = db.collection('subjects/classes/main')
 const coursesCollection = db.collection('subjects/classes/courses')
+const eventCollection = db.collection('subjects/classes/event')
 const resourcesCollection = db.collection('subjects/courses/resources')
 const tasksCollection = db.collection('subjects/classes/tasks')
 const postsCollection = db.collection('posts')
@@ -31,5 +32,6 @@ export {
   resourcesCollection,
   classesCollection,
   tasksCollection,
-  coursesCollection
+  coursesCollection,
+  eventCollection,
 }
