@@ -14,7 +14,7 @@ Web app for Riphah class resources
 
 1.  Only class CR or management can manage and update resources
 2.  Material UI.
-4.  Open Source =>  [https://github.com/resourcesr/app](https://github.com/resourcesr/web)  
+4.  Open Source =>  [https://github.com/resourcesr/web](https://github.com/resourcesr/web)  
     Even you can contribute to this project.
 
   
