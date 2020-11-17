@@ -55,8 +55,7 @@ export default {
     },
     updateList () { 
       this.breadcrumbList = this.$route.meta.breadcrumb
-      }
-
+    }
   },
   mounted() {
     this.updateList()
