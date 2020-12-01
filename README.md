@@ -1,4 +1,4 @@
-
+![Build and Deploy](https://github.com/resourcesr/web/workflows/Build%20and%20Deploy/badge.svg)
 
 # ResourceR Web App
 Web app for Riphah class resources 
