@@ -223,7 +223,7 @@ export default {
                 this.submit = false
             }).finally(status => {
                 this.isMsg = true
-                this.msg = status.message
+                this.msg = "success"
                 this.submit = false
             })
         },
