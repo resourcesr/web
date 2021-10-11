@@ -173,6 +173,15 @@
                     </v-text-field>
                 </v-card-text>
 
+                 <v-select
+                    :items="semstors"
+                    label="Select Sem"
+                    v-model="event.forms.sem"
+                    ></v-select>
+                    <v-row
+                    justify="space-around"
+                    align="center"
+                    />
             </v-card>
             </v-dialog>
         </div>
@@ -199,6 +208,7 @@ export default {
             'Monday',
             'Tuesday',
             'Wednesday',
+            'Thursday',
             'Friday',
             'Saturday',
         ],
@@ -215,6 +225,7 @@ export default {
                 start: null,
                 end: null,
                 room: null,
+                sem: null,
             }
         },
         courses: {
@@ -246,7 +257,8 @@ export default {
                 start: this.event.forms.start,
                 end: this.event.forms.end,
                 room: this.event.forms.room,
-                klass_id: this.klass_id
+                klass_id: this.klass_id,
+                sem: this.event.forms.sem
             }
         },
         addEventDispatch() {

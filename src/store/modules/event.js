@@ -33,6 +33,7 @@ export default {
             room: form.room,
             klass_id: form.klass_id,
             type: "class",
+            sem: form.sem,
           })
         },
         async getEventByCourse({commit}, course_id) {
